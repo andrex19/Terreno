@@ -34,6 +34,7 @@ public class VistaTerreno2 extends javax.swing.JFrame {
                 botones [i][j].setBorderPainted(true);
                 this.panelTerreno.add(botones[i][j]); 
             }
+        
         }
         
     }

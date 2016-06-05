@@ -44,6 +44,8 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
                 infoCasillas[i][j]=new Casilla();
                 
             }
+       
+        
         }
         
     }
@@ -55,9 +57,13 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
     this.cp=cp;
     this.vistaTerreno=new VistaTerreno2();
     this.vistaTerreno.setVisible(true);
-    this.vistaTerreno.agregarListener(this,this);
-    
+    this.vistaTerreno.agregarListener(this,this); 
+    ponerJefesTerreno("mio!");
 
+    }
+    public void ponerJefesTerreno(String jefe1){
+         infoCasillas[0][6].terreno="mio!";
+         vistaTerreno.botones[0][6].setIcon(goku);
     }
     
 
@@ -70,13 +76,25 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
         
      }
     public boolean verificarTerreno(int[][]carasDado){
-        boolean respuesta=true;
-        for (int[]fila:carasDado){
-            if(fila[0]<0 || fila[0]>14 || fila[1]<0 || fila[1]>14){
-                return false;
-            }
-        }
-        return respuesta;
+        boolean aux=false;
+        for (int[]cara:carasDado){
+                aux=verificarAdyacente(cara[0],cara[1]);
+              
+                
+           }   
+           for (int[]cara:carasDado){
+                if (cara[0]<0 || cara[0]>14 || cara[1]<0 || cara[1]>14){
+                    aux=false;
+                    }
+           }  
+           for (int[]cara:carasDado){
+                if ((cara[0]>=0 && cara[0]<15 && cara[1]>=0 && cara[1]<15)){
+                    if (infoCasillas[cara[0]][cara[1]].terreno.equals("")==false){
+                        aux=false;
+                    }
+                }
+           }
+        return aux;
     }
     public void limpiar(){
         for (int i=0;i<15;i++){
@@ -88,7 +106,7 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
             }
         }
     }
-    public boolean metodo3(int x, int y){
+    public boolean verificarAdyacente(int x, int y){
         boolean aux=false;
         for (int[]cara:carasDado){
             
@@ -121,34 +139,8 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
     public void metodo1(int[][] carasDado, boolean boleano){
         boolean aux=true;
         if(boleano==true){
-
-           for (int[]cara:carasDado){
-                aux=metodo3(cara[0],cara[1]);
-                
-                
-                
-                /*if (aux==true){
-                    System.out.println("("+cara[0]+"."+cara[1]+")"+" puede poner");
-                }
-                else{
-                    System.out.println("("+cara[0]+"."+cara[1]+")"+" no puede puede poner");
-                }*/
-                
-                  
-                
-           }   
-           for (int[]cara:carasDado){
-                if (cara[0]<0 || cara[0]>14 || cara[1]<0 || cara[1]>14){
-                    aux=false;
-                    }
-           }  
-           for (int[]cara:carasDado){
-                if ((cara[0]>=0 && cara[0]<15 && cara[1]>=0 && cara[1]<15)){
-                    if (infoCasillas[cara[0]][cara[1]].terreno.equals("")==false){
-                        aux=false;
-                    }
-                }
-           }    
+            aux=verificarTerreno(carasDado);
+               
             
             
             if (aux){
