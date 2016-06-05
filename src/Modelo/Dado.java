@@ -8,7 +8,7 @@ public class Dado {
     }
 
     public int[][] generarTerreno(int f,int c,int num,int rot){
-        int[][] carasDado =  new int[6][2];
+    int[][] carasDado =  new int[6][2];
         if (num==0){
        
                 //figura 1,1
@@ -190,8 +190,7 @@ public class Dado {
             girarTerreno(carasDado);
             
         }
-        System.out.println("hola2");
-           return carasDado;
+    return carasDado;
         }
     public int[][] girarTerreno(int[][] carasDado){
         int f = carasDado[0][0];

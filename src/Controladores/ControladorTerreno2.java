@@ -76,8 +76,6 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
             for (int j=0;j<15;j++){
                if (vistaTerreno.botones[i][j]==e.getSource()){
                     System.out.println(" haz presionado el boton !("+i+","+j+")" );
-                    System.out.println("hola");
-
                     carasDado=dado.generarTerreno(i,j,numero,rotacion);
                     if (verificarTerreno(carasDado)){
                         ponerFigura(carasDado);
@@ -157,6 +155,6 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
             }
         }
     }
-*/   
+  */
     
 }
