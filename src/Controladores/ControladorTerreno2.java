@@ -182,6 +182,7 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
                     carasDado=dado.generarTerreno(i,j,numero,rotacion);
                     if (verificarTerreno(carasDado)){
                         ponerFigura(carasDado,"mio!");
+                        System.out.println("dado desplegado");
                     }
                     else{
                         System.out.println("No se peude desplegar el dado");
@@ -196,7 +197,7 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
     @Override
     public void mouseWheelMoved(MouseWheelEvent e){
         if (e.getWheelRotation()==1){
-            System.out.println(" Cambiar figura anterior");
+            System.out.println(" Cambiar a figura " + numero);
             if (numero>0){
                 numero-=1;
             }
@@ -204,7 +205,7 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
             
         }
         else if(e.getWheelRotation()==-1){
-            System.out.println(" cambiar figura siguiente");
+            System.out.println(" cambiar a figura: "+ numero);
             if (numero<10){
                 numero+=1;
             } 
@@ -213,8 +214,9 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
     }
     @Override
     public void mousePressed(MouseEvent e){
-        System.out.println("rotar las figuras 90 grados");
+        
         if (e.getModifiersEx()==MouseEvent.BUTTON3_DOWN_MASK){
+            System.out.println("rotar las figuras 90 grados");
             rotacion+=1;
             if (rotacion==4){
                 rotacion=0;
