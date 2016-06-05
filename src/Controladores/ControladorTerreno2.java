@@ -13,9 +13,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
-import java.util.Scanner;
 import javax.swing.ImageIcon;
-//
+
+
 /**
  *
  * @author Samsung
@@ -23,13 +23,20 @@ import javax.swing.ImageIcon;
 public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
     MatrizTerreno cp;
     VistaTerreno2 vistaTerreno;
-    ImageIcon goku =new ImageIcon(this.getClass().getResource("/Imagenes/goku.png"));
-    Dado dado=new Dado();
-    public Casilla[][] mapa = new Casilla[15][15]; 
+    ImageIcon goku;
+    Dado dado;
+    public Casilla[][] mapa; 
     public int[][] carasDado;
     public static int numero=0;
+    public static int rotacion=0;
     //JefeTerreno JefeTerreno;
     //ControladorMenu contMenu=new ControladorMenu();
+
+    public ControladorTerreno2() {
+        this.dado = new Dado();
+        this.goku = new ImageIcon(this.getClass().getResource("/Imagenes/goku.png"));
+        this.mapa = new Casilla[15][15];
+    }
     
     
        
@@ -69,8 +76,9 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
             for (int j=0;j<15;j++){
                if (vistaTerreno.botones[i][j]==e.getSource()){
                     System.out.println(" haz presionado el boton !("+i+","+j+")" );
-                    //vistaTerreno.botones[i][j].setIcon(pasto);
-                    carasDado=dado.generarTerreno(i, j, numero);
+                    System.out.println("hola");
+
+                    carasDado=dado.generarTerreno(i,j,numero,rotacion);
                     if (verificarTerreno(carasDado)){
                         ponerFigura(carasDado);
                     }
@@ -97,6 +105,16 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
             if (numero<10){
                 numero+=1;
             }     
+        }
+    }
+    @Override
+    public void mousePressed(MouseEvent e){
+        if (e.getModifiersEx()==MouseEvent.BUTTON3_DOWN_MASK){
+            rotacion+=1;
+            if (rotacion==4){
+                rotacion=0;
+            }
+                    
         }
     }
 /*

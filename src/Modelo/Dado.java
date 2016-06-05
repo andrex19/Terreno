@@ -1,12 +1,16 @@
 package Modelo;
 
 public class Dado {
-    public int carasDado[][]=new int[6][2];
+    public int carasDado[][];
 
-    public int[][] generarTerreno(int f, int c,int num){
-            int[][] carasDado =  new int[6][2];
-        switch (num) {
-            case 0:
+    public Dado() {
+        this.carasDado = new int[6][2];
+    }
+
+    public int[][] generarTerreno(int f,int c,int num,int rot){
+        int[][] carasDado =  new int[6][2];
+        if (num==0){
+       
                 //figura 1,1
                 carasDado[0][0]=f;
                 carasDado[0][1]=c;
@@ -20,8 +24,8 @@ public class Dado {
                 carasDado[4][1]=c-1;
                 carasDado[5][0]=f+2;
                 carasDado[5][1]=c+1;
-                break;
-            case 1:
+        }
+        else if (num==1){
                 //figura 2,1
                 carasDado[0][0]=f;
                 carasDado[0][1]=c;
@@ -35,8 +39,8 @@ public class Dado {
                 carasDado[4][1]=c-1;
                 carasDado[5][0]=f-3;
                 carasDado[5][1]=c+1;
-                break;
-            case 2:
+        }
+        else if (num==2){
                 //figura 1,2
                 carasDado[0][0]=f;
                 carasDado[0][1]=c;
@@ -50,8 +54,8 @@ public class Dado {
                 carasDado[4][1]=c-1;
                 carasDado[5][0]=f-4;
                 carasDado[5][1]=c-1;
-                break;
-            case 3:
+        }
+        else if (num==3){
                 //figura 2, 2  
                 carasDado[0][0]=f;
                 carasDado[0][1]=c;
@@ -65,8 +69,8 @@ public class Dado {
                 carasDado[4][1]=c+1;
                 carasDado[5][0]=f-4;
                 carasDado[5][1]=c+1;
-                break;
-            case 4:
+        }
+        else if (num==4){
                 //figura1,3
                 carasDado[0][0]=f;
                 carasDado[0][1]=c;
@@ -80,8 +84,8 @@ public class Dado {
                 carasDado[4][1]=c+2;
                 carasDado[5][0]=f-3;
                 carasDado[5][1]=c+2;
-                break;
-            case 5:
+        }
+        else if (num==5){
                 //figura 1,4
                 carasDado[0][0]=f;
                 carasDado[0][1]=c;
@@ -95,8 +99,8 @@ public class Dado {
                 carasDado[4][1]=c-1;
                 carasDado[5][0]=f-3;
                 carasDado[5][1]=c-2;
-                break;
-            case 6:
+        }
+        else if (num==6){
                 //figura 1,5
                 carasDado[0][0]=f;
                 carasDado[0][1]=c;
@@ -110,8 +114,8 @@ public class Dado {
                 carasDado[4][1]=c-1;
                 carasDado[5][0]=f-2;
                 carasDado[5][1]=c-2;
-                break;
-            case 7:
+        }
+        else if (num==7){
                 // esta mala!
                 carasDado[0][0]=f;
                 carasDado[0][1]=c;
@@ -125,8 +129,8 @@ public class Dado {
                 carasDado[4][1]=c+1;
                 carasDado[5][0]=f-4;
                 carasDado[5][1]=c+1;
-                break;
-            case 8:
+        }
+        else if (num==8){
                 //figura 2,3
                 carasDado[0][0]=f;
                 carasDado[0][1]=c;
@@ -140,8 +144,8 @@ public class Dado {
                 carasDado[4][1]=c-2;
                 carasDado[5][0]=f-3;
                 carasDado[5][1]=c-2;
-                break;
-            case 9:
+        }
+        else if (num==9){
                 //figura2,4
                 carasDado[0][0]=f;
                 carasDado[0][1]=c;
@@ -155,8 +159,8 @@ public class Dado {
                 carasDado[4][1]=c+1;
                 carasDado[5][0]=f-3;
                 carasDado[5][1]=c+2;
-                break;
-            case 10:
+        }
+        else if (num==10){
                 //figura 2,5
                 carasDado[0][0]=f;
                 carasDado[0][1]=c;
@@ -170,10 +174,23 @@ public class Dado {
                 carasDado[4][1]=c+1;
                 carasDado[5][0]=f-2;
                 carasDado[5][1]=c+2;
-                break;
-            default:
-                break;
         }
+        if (rot==1){
+            girarTerreno(carasDado);
+        }
+            
+        
+        else if (rot==2){
+            girarTerreno(carasDado);
+            girarTerreno(carasDado);
+        }
+        else if (rot==3){
+            girarTerreno(carasDado);
+            girarTerreno(carasDado);
+            girarTerreno(carasDado);
+            
+        }
+        System.out.println("hola2");
            return carasDado;
         }
     public int[][] girarTerreno(int[][] carasDado){
