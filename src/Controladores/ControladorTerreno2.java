@@ -25,7 +25,7 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
     VistaTerreno2 vistaTerreno;
     ImageIcon goku;
     Dado dado;
-    public Casilla[][] mapa; 
+    public Casilla[][] infoCasillas; 
     public int[][] carasDado;
     public static int numero=0;
     public static int rotacion=0;
@@ -35,7 +35,14 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
     public ControladorTerreno2() {
         this.dado = new Dado();
         this.goku = new ImageIcon(this.getClass().getResource("/Imagenes/goku.png"));
-        this.mapa = new Casilla[15][15];
+        this.infoCasillas = new Casilla[15][15];
+        for (int i=0;i<15;i++){
+            for (int j=0;j<15;j++){
+                infoCasillas[i][j]=new Casilla();
+                
+            }
+        }
+        
     }
     
     
@@ -51,12 +58,13 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
     }
     
 
-    public void ponerFigura(int[][] carasDado){
+    public void ponerFigura(int[][] carasDado,String jefe1){
                       
         for (int[]fila:carasDado){
             vistaTerreno.botones[fila[0]][fila[1]].setIcon(goku);
-            
+            this.infoCasillas[fila[0]][fila[1]].terreno=jefe1;
         }
+        
      }
     public boolean verificarTerreno(int[][]carasDado){
         boolean respuesta=true;
@@ -66,6 +74,18 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
             }
         }
         return respuesta;
+    }
+    public void metodo1(int[][] carasDado, boolean boleano){
+        if(boleano==true){
+            for (int[]fila:carasDado){
+            vistaTerreno.botones[fila[0]][fila[1]].setIcon(goku);            
+            }
+        }
+        else{
+            for (int[]fila:carasDado){
+            vistaTerreno.botones[fila[0]][fila[1]].setIcon(null); 
+            }
+        }
     }
     
     
@@ -78,7 +98,7 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
                     System.out.println(" haz presionado el boton !("+i+","+j+")" );
                     carasDado=dado.generarTerreno(i,j,numero,rotacion);
                     if (verificarTerreno(carasDado)){
-                        ponerFigura(carasDado);
+                        ponerFigura(carasDado,"mio!");
                     }
                     else{
                         System.out.println("No se peude desplegar el dado");
@@ -115,7 +135,7 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
                     
         }
     }
-/*
+
     @Override
     public void mouseEntered(MouseEvent e) {
         for (int i=0;i<15;i++){
@@ -123,9 +143,9 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
                if (vistaTerreno.botones[i][j]==e.getSource()){
                     System.out.println(" mouse sobre el boton!("+i+","+j+")" );
                     //vistaTerreno.botones[i][j].setIcon(pasto);
-                    
-                    if (dado.verificarTerreno(carasDado)){
-                        ponerFigura(carasDado);
+                    carasDado=dado.generarTerreno(i,j,numero,rotacion);
+                    if (verificarTerreno(carasDado)){
+                        metodo1(carasDado,true);
                     }
                     else{
                         System.out.println("No se peude desplegar el dado");
@@ -143,9 +163,9 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
                if (vistaTerreno.botones[i][j]==e.getSource()){
                     System.out.println(" mouse sobre el boton!("+i+","+j+")" );
                     //vistaTerreno.botones[i][j].setIcon(pasto);
-                    
-                    if (dado.verificarTerreno(carasDado)){
-                        ponerFigura(carasDado);
+                    carasDado=dado.generarTerreno(i,j,numero,rotacion);
+                    if (verificarTerreno(carasDado)){
+                        metodo1(carasDado,false);
                     }
                     else{
                         System.out.println("No se peude desplegar el dado");
@@ -155,6 +175,6 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
             }
         }
     }
-  */
+  
     
 }
