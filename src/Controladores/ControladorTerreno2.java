@@ -23,7 +23,7 @@ import javax.swing.ImageIcon;
 public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
     MatrizTerreno cp;
     VistaTerreno2 vistaTerreno;
-    ImageIcon goku;
+    ImageIcon goku,rojo,verde;
     Dado dado;
     public Casilla[][] infoCasillas; 
     public int[][] carasDado;
@@ -35,6 +35,8 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
     public ControladorTerreno2() {
         this.dado = new Dado();
         this.goku = new ImageIcon(this.getClass().getResource("/Imagenes/goku.png"));
+        this.rojo = new ImageIcon(this.getClass().getResource("/Imagenes/rojo.png"));
+        this.verde = new ImageIcon(this.getClass().getResource("/Imagenes/verde.png"));
         this.infoCasillas = new Casilla[15][15];
         for (int i=0;i<15;i++){
             for (int j=0;j<15;j++){
@@ -75,16 +77,82 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
         }
         return respuesta;
     }
-    public void metodo1(int[][] carasDado, boolean boleano){
-        if(boleano==true){
-            for (int[]fila:carasDado){
-            vistaTerreno.botones[fila[0]][fila[1]].setIcon(goku);            
+    public void limpiar(){
+        for (int i=0;i<15;i++){
+            for (int j=0;j<15;j++){
+                if (infoCasillas[i][j].terreno.equals("")){
+                    vistaTerreno.botones[i][j].setIcon(null);
+                }
+                
             }
         }
-        else{
-            for (int[]fila:carasDado){
-            vistaTerreno.botones[fila[0]][fila[1]].setIcon(null); 
+    }
+    //if ((cara[0]>=0 && cara[0]<15 && cara[1]>=0 && cara[1]<15)){
+    public void metodo1(int[][] carasDado, boolean boleano){
+        boolean aux=true;
+        if(boleano==true){
+
+           for (int[]cara:carasDado){
+                if (cara[0]<0 || cara[0]>14 || cara[1]<0 || cara[1]>14){
+                    aux=false;
+                }
+                if ((cara[0]>=0 && cara[0]<15 && cara[1]>=0 && cara[1]<15)){
+                    if (infoCasillas[cara[0]][cara[1]].terreno.equals("")==false){
+                        aux=false;
+                    }
+                }   
+                
+                if ((cara[0]+1>=0 && cara[0]+1<15 && cara[1]>=0 && cara[1]<15)){
+                    if (infoCasillas[cara[0]+1][cara[1]].terreno.equals("mio!")){
+                        aux=false;
+                    }
+                }
+                else if ((cara[0]>=0 && cara[0]<15 && cara[1]+1>=0 && cara[1]+1<15)){
+                    if (infoCasillas[cara[0]][cara[1]+1].terreno.equals("mio!")){
+                        aux=false;
+                    }
+                }
+                else if ((cara[0]-1>=0 && cara[0]-1<15 && cara[1]>=0 && cara[1]<15)){
+                    if (infoCasillas[cara[0]-1][cara[1]].terreno.equals("mio!")){
+                        aux=false;
+                    }
+                }
+                else if ((cara[0]>=0 && cara[0]<15 && cara[1]-1>=0 && cara[1]-1<15)){
+                    if (infoCasillas[cara[0]][cara[1]-1].terreno.equals("mio!")){
+                        aux=false;
+                    }
+                }
+                    
+                    //////
+                    
+                  
+                
             }
+            
+            if (aux){
+                for (int[]cara:carasDado){
+                    if ((cara[0]>=0 && cara[0]<15 && cara[1]>=0 && cara[1]<15)){           
+                        if (infoCasillas[cara[0]][cara[1]].terreno.equals("")){
+                            vistaTerreno.botones[cara[0]][cara[1]].setIcon(verde);     
+                        }
+                    }
+                }
+                
+            }
+            else{
+                for (int[]cara:carasDado){
+                    if ((cara[0]>=0 && cara[0]<15 && cara[1]>=0 && cara[1]<15)){           
+                        if (infoCasillas[cara[0]][cara[1]].terreno.equals("")){
+                            vistaTerreno.botones[cara[0]][cara[1]].setIcon(rojo);     
+                        }
+                    }
+                }
+                
+            }
+            
+        }
+        else{
+            limpiar();
         }
     }
     
@@ -113,25 +181,30 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
     @Override
     public void mouseWheelMoved(MouseWheelEvent e){
         if (e.getWheelRotation()==1){
-            System.out.println(" hacia abajo");
+            System.out.println(" Cambiar figura anterior");
             if (numero>0){
                 numero-=1;
-            }            
+            }
+            limpiar();
+            
         }
         else if(e.getWheelRotation()==-1){
-            System.out.println(" hacia arriba");
+            System.out.println(" cambiar figura siguiente");
             if (numero<10){
                 numero+=1;
-            }     
+            } 
+            limpiar();
         }
     }
     @Override
     public void mousePressed(MouseEvent e){
+        System.out.println("rotar las figuras 90 grados");
         if (e.getModifiersEx()==MouseEvent.BUTTON3_DOWN_MASK){
             rotacion+=1;
             if (rotacion==4){
                 rotacion=0;
             }
+            limpiar();
                     
         }
     }
@@ -144,13 +217,8 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
                     System.out.println(" mouse sobre el boton!("+i+","+j+")" );
                     //vistaTerreno.botones[i][j].setIcon(pasto);
                     carasDado=dado.generarTerreno(i,j,numero,rotacion);
-                    if (verificarTerreno(carasDado)){
-                        metodo1(carasDado,true);
-                    }
-                    else{
-                        System.out.println("No se peude desplegar el dado");
-                    }
-                    
+                    metodo1(carasDado,true);
+                                       
                }
             }
         }
@@ -164,14 +232,8 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
                     System.out.println(" mouse sobre el boton!("+i+","+j+")" );
                     //vistaTerreno.botones[i][j].setIcon(pasto);
                     carasDado=dado.generarTerreno(i,j,numero,rotacion);
-                    if (verificarTerreno(carasDado)){
-                        metodo1(carasDado,false);
-                    }
-                    else{
-                        System.out.println("No se peude desplegar el dado");
-                    }
-                    
-               }
+                    metodo1(carasDado,false);
+                }
             }
         }
     }
