@@ -23,7 +23,7 @@ import javax.swing.ImageIcon;
 public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
     MatrizTerreno cp;
     VistaTerreno2 vistaTerreno;
-    ImageIcon goku,rojo,verde;
+    ImageIcon goku,rojo,verde,azul;
     Dado dado;
     public Casilla[][] infoCasillas; 
     public int[][] carasDado;
@@ -37,6 +37,7 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
         this.goku = new ImageIcon(this.getClass().getResource("/Imagenes/goku.png"));
         this.rojo = new ImageIcon(this.getClass().getResource("/Imagenes/rojo.png"));
         this.verde = new ImageIcon(this.getClass().getResource("/Imagenes/verde.png"));
+        this.azul = new ImageIcon(this.getClass().getResource("/Imagenes/azul.png"));
         this.infoCasillas = new Casilla[15][15];
         for (int i=0;i<15;i++){
             for (int j=0;j<15;j++){
@@ -87,47 +88,68 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
             }
         }
     }
-    //if ((cara[0]>=0 && cara[0]<15 && cara[1]>=0 && cara[1]<15)){
+    public boolean metodo3(int x, int y){
+        boolean aux=false;
+        for (int[]cara:carasDado){
+            
+                if ((cara[0]+1>=0 && cara[0]+1<15 && cara[1]>=0 && cara[1]<15)){
+                    if (infoCasillas[cara[0]+1][cara[1]].terreno.equals("mio!")){
+                        return true ;
+                    }
+                }
+                if ((cara[0]>=0 && cara[0]<15 && cara[1]+1>=0 && cara[1]+1<15)){
+                    if (infoCasillas[cara[0]][cara[1]+1].terreno.equals("mio!")){
+                        return true ;
+                    }
+                }
+                if ((cara[0]-1>=0 && cara[0]-1<15 && cara[1]>=0 && cara[1]<15)){
+                    if (infoCasillas[cara[0]-1][cara[1]].terreno.equals("mio!")){
+                        return true ;
+                    }
+                }
+                if ((cara[0]>=0 && cara[0]<15 && cara[1]-1>=0 && cara[1]-1<15)){
+                    if (infoCasillas[cara[0]][cara[1]-1].terreno.equals("mio!")){
+                        return true ;
+                    }
+                }
+                
+            }
+        return aux;    
+    }
+    
+    
     public void metodo1(int[][] carasDado, boolean boleano){
         boolean aux=true;
         if(boleano==true){
 
            for (int[]cara:carasDado){
+                aux=metodo3(cara[0],cara[1]);
+                
+                
+                
+                /*if (aux==true){
+                    System.out.println("("+cara[0]+"."+cara[1]+")"+" puede poner");
+                }
+                else{
+                    System.out.println("("+cara[0]+"."+cara[1]+")"+" no puede puede poner");
+                }*/
+                
+                  
+                
+           }   
+           for (int[]cara:carasDado){
                 if (cara[0]<0 || cara[0]>14 || cara[1]<0 || cara[1]>14){
                     aux=false;
-                }
+                    }
+           }  
+           for (int[]cara:carasDado){
                 if ((cara[0]>=0 && cara[0]<15 && cara[1]>=0 && cara[1]<15)){
                     if (infoCasillas[cara[0]][cara[1]].terreno.equals("")==false){
                         aux=false;
                     }
-                }   
-                
-                if ((cara[0]+1>=0 && cara[0]+1<15 && cara[1]>=0 && cara[1]<15)){
-                    if (infoCasillas[cara[0]+1][cara[1]].terreno.equals("mio!")){
-                        aux=false;
-                    }
                 }
-                else if ((cara[0]>=0 && cara[0]<15 && cara[1]+1>=0 && cara[1]+1<15)){
-                    if (infoCasillas[cara[0]][cara[1]+1].terreno.equals("mio!")){
-                        aux=false;
-                    }
-                }
-                else if ((cara[0]-1>=0 && cara[0]-1<15 && cara[1]>=0 && cara[1]<15)){
-                    if (infoCasillas[cara[0]-1][cara[1]].terreno.equals("mio!")){
-                        aux=false;
-                    }
-                }
-                else if ((cara[0]>=0 && cara[0]<15 && cara[1]-1>=0 && cara[1]-1<15)){
-                    if (infoCasillas[cara[0]][cara[1]-1].terreno.equals("mio!")){
-                        aux=false;
-                    }
-                }
-                    
-                    //////
-                    
-                  
-                
-            }
+           }    
+            
             
             if (aux){
                 for (int[]cara:carasDado){
@@ -149,6 +171,7 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
                 }
                 
             }
+            
             
         }
         else{
