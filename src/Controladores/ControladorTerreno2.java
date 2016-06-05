@@ -54,16 +54,20 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
        
     public void verVista(MatrizTerreno cp) {
     
-    this.cp=cp;
-    this.vistaTerreno=new VistaTerreno2();
-    this.vistaTerreno.setVisible(true);
-    this.vistaTerreno.agregarListener(this,this); 
-    ponerJefesTerreno("mio!");
+        this.cp=cp;
+        this.vistaTerreno=new VistaTerreno2();
+        this.vistaTerreno.setVisible(true);
+        this.vistaTerreno.agregarListener(this,this); 
+        ponerJefesTerreno("mio!");
 
     }
     public void ponerJefesTerreno(String jefe1){
-         infoCasillas[0][6].terreno="mio!";
-         vistaTerreno.botones[0][6].setIcon(goku);
+         infoCasillas[0][7].terreno="mio!"; /*  Aquí a cada terreno hay que darle el nombre de los distintos jefes de terreno*/
+         vistaTerreno.botones[0][7].setIcon(goku);
+         /*vistaTerreno.botones[7][0].setIcon(goku);
+         vistaTerreno.botones[14][7].setIcon(goku);
+         vistaTerreno.botones[7][14].setIcon(goku);*/
+         
     }
     
 
