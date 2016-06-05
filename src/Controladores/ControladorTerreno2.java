@@ -23,7 +23,7 @@ import javax.swing.ImageIcon;
 public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
     MatrizTerreno cp;
     VistaTerreno2 vistaTerreno;
-    ImageIcon goku,rojo,verde,azul;
+    ImageIcon goku,rojo,verde,azul,kaio;
     Dado dado;
     public Casilla[][] infoCasillas; 
     public int[][] carasDado;
@@ -35,6 +35,7 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
     public ControladorTerreno2() {
         this.dado = new Dado();
         this.goku = new ImageIcon(this.getClass().getResource("/Imagenes/goku.png"));
+        this.kaio = new ImageIcon(this.getClass().getResource("/Imagenes/Kaio-Sama.PNG"));
         this.rojo = new ImageIcon(this.getClass().getResource("/Imagenes/rojo.png"));
         this.verde = new ImageIcon(this.getClass().getResource("/Imagenes/verde.png"));
         this.azul = new ImageIcon(this.getClass().getResource("/Imagenes/azul.png"));
@@ -62,10 +63,11 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
 
     }
     public void ponerJefesTerreno(String jefe1){
-         infoCasillas[0][7].terreno="mio!"; /*  Aquí a cada terreno hay que darle el nombre de los distintos jefes de terreno*/
+         infoCasillas[0][7].terreno="mio!";
+         infoCasillas[7][0].terreno="Kaio-Sama";/*  Aquí a cada terreno hay que darle el nombre de los distintos jefes de terreno*/
          vistaTerreno.botones[0][7].setIcon(goku);
-         /*vistaTerreno.botones[7][0].setIcon(goku);
-         vistaTerreno.botones[14][7].setIcon(goku);
+         vistaTerreno.botones[7][0].setIcon(kaio);
+         /*vistaTerreno.botones[14][7].setIcon(goku);
          vistaTerreno.botones[7][14].setIcon(goku);*/
          
     }
