@@ -8,7 +8,6 @@ package Vista;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 /**
@@ -22,9 +21,7 @@ public class VistaTerreno2 extends javax.swing.JFrame {
      */
     public VistaTerreno2() {
         initComponents();
-        pasto =new ImageIcon(this.getClass().getResource("/Imagenes/goku.png"));
-        superficie=new ImageIcon(this.getClass().getResource("/Imagenes/superficie.png"));
-        superficie2= new ImageIcon(this.getClass().getResource("/Imagenes/superficie2.png"));
+        
         
         this.panelTerreno.setLayout(new GridLayout(15,15));
         for (int i=0;i<15;i++){
@@ -113,7 +110,7 @@ public class VistaTerreno2 extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     
     public JButton[][] botones = new JButton[15][15];
-    ImageIcon pasto, superficie,superficie2;
+    
     
     public void agregarListener(ActionListener al,MouseAdapter ml){
         for (int i=0;i<15;i++){
