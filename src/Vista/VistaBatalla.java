@@ -9,6 +9,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /**
  *
@@ -45,10 +46,19 @@ public class VistaBatalla extends javax.swing.JFrame {
     private void initComponents() {
 
         panelTerreno = new javax.swing.JPanel();
+        btnInvocar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        panelTerreno.setEnabled(false);
         panelTerreno.setLayout(new java.awt.GridLayout(1, 0));
+
+        btnInvocar.setText("Invocar");
+        btnInvocar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInvocarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -56,19 +66,30 @@ public class VistaBatalla extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelTerreno, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addComponent(panelTerreno, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56)
+                .addComponent(btnInvocar)
+                .addContainerGap(229, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelTerreno, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(btnInvocar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(panelTerreno, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnInvocarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInvocarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnInvocarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -107,6 +128,7 @@ public class VistaBatalla extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnInvocar;
     private javax.swing.JPanel panelTerreno;
     // End of variables declaration//GEN-END:variables
     
@@ -118,9 +140,20 @@ public class VistaBatalla extends javax.swing.JFrame {
             for (int j=0;j<15;j++){
                 this.botones[i][j].addActionListener(al);
                 this.botones[i][j].addMouseListener(ml);
+                
             }
         }
         this.panelTerreno.addMouseWheelListener(ml);
+        this.btnInvocar.addActionListener(al);
+    }
+    public JButton getBtnInvocar(){
+        return this.btnInvocar;
+    }
+    public JButton[][] getBotonesTerreno(){
+        return this.botones;
+    }
+    public JPanel getPanelTerreno(){
+        return this.panelTerreno;
     }
     
     
