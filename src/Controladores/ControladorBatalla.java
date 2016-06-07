@@ -7,7 +7,7 @@ package Controladores;
 
 import Modelo.Casilla;
 import Modelo.Dado;
-import Vista.VistaTerreno2;
+import Vista.VistaBatalla;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -20,9 +20,9 @@ import javax.swing.ImageIcon;
  *
  * @author Samsung
  */
-public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
+public class ControladorBatalla extends MouseAdapter implements ActionListener{
     MatrizTerreno cp;
-    VistaTerreno2 vistaTerreno;
+    VistaBatalla vistaTerreno;
     ImageIcon goku,rojo,verde,azul,kaio;
     Dado dado;
     public Casilla[][] infoCasillas; 
@@ -32,7 +32,7 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
     //JefeTerreno JefeTerreno;
     //ControladorMenu contMenu=new ControladorMenu();
 
-    public ControladorTerreno2() {
+    public ControladorBatalla() {
         this.dado = new Dado();
         this.goku = new ImageIcon(this.getClass().getResource("/Imagenes/goku.png"));
         this.kaio = new ImageIcon(this.getClass().getResource("/Imagenes/Kaio-Sama.PNG"));
@@ -56,7 +56,7 @@ public class ControladorTerreno2 extends MouseAdapter implements ActionListener{
     public void verVista(MatrizTerreno cp) {
     
         this.cp=cp;
-        this.vistaTerreno=new VistaTerreno2();
+        this.vistaTerreno=new VistaBatalla();
         this.vistaTerreno.setVisible(true);
         this.vistaTerreno.agregarListener(this,this); 
         ponerJefesTerreno("mio!");
