@@ -13,6 +13,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
+import java.util.ArrayList;
+import java.util.Random;
 import javax.swing.ImageIcon;
 
 
@@ -29,10 +31,15 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
     public int[][] carasDado;
     public static int numero=0;
     public static int rotacion=0;
-    //JefeTerreno JefeTerreno;
-    //ControladorMenu contMenu=new ControladorMenu();
+    public ArrayList <Integer> turnos;
+    public String ultimoBoton;
+    private int ultimo_boton;
+    //public ControladorMover controladorMover;
+    //public ControladorInvocar controladorInvocar;
 
     public ControladorBatalla() {
+        this.turnos = new ArrayList<Integer>();
+        generarTurnos();
         this.dado = new Dado();
         this.goku = new ImageIcon(this.getClass().getResource("/Imagenes/goku.png"));
         this.kaio = new ImageIcon(this.getClass().getResource("/Imagenes/Kaio-Sama.PNG"));
@@ -48,6 +55,24 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
        
         
         }
+        
+    }
+    public void generarTurnos(){
+        
+        Random random= new Random();
+        int aleatorio;
+        while (this.turnos.size()<4){
+             aleatorio=random.nextInt(4)+1;
+            if (this.turnos.contains(aleatorio)==false){
+                this.turnos.add(aleatorio);
+                System.out.println(aleatorio);
+                
+            }
+        System.out.println(this.turnos);    
+        }
+        
+        
+        
         
     }
     
@@ -83,10 +108,10 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
         }
         
      }
-    public boolean verificarTerreno(int[][]carasDado){
+    public boolean verificarTerreno(int[][]carasDado, String jefeTerreno){
         boolean aux=false;
         for (int[]cara:carasDado){
-                aux=verificarAdyacente(cara[0],cara[1],"Kaio-Sama");
+                aux=verificarAdyacente(cara[0],cara[1],jefeTerreno);
               
                 
            }   
@@ -147,7 +172,7 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
     public void metodo1(int[][] carasDado, boolean boleano){
         boolean aux=true;
         if(boleano==true){
-            aux=verificarTerreno(carasDado);
+            aux=verificarTerreno(carasDado,"Kaio-Sama");
                
             
             
@@ -183,85 +208,106 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (vistaTerreno.getBtnInvocar()==e.getSource()){
+            ultimo_boton=1;
+        }
+        if (ultimo_boton==1){
+            for (int i=0;i<15;i++){
+                for (int j=0;j<15;j++){
+                   if (vistaTerreno.botones[i][j]==e.getSource()){
+                        System.out.println(" haz presionado el boton !("+i+","+j+")" );
+                        carasDado=dado.generarTerreno(i,j,numero,rotacion);
+                        if (verificarTerreno(carasDado,"Kaio-Sama")){
+                            ponerFigura(carasDado,"Kaio-Sama");
+                            System.out.println("dado desplegado");
+                            ultimo_boton=0;
+                        }
+                        else{
+                            System.out.println("No se peude desplegar el dado");
+                        }
 
-        for (int i=0;i<15;i++){
-            for (int j=0;j<15;j++){
-               if (vistaTerreno.botones[i][j]==e.getSource()){
-                    System.out.println(" haz presionado el boton !("+i+","+j+")" );
-                    carasDado=dado.generarTerreno(i,j,numero,rotacion);
-                    if (verificarTerreno(carasDado)){
-                        ponerFigura(carasDado,"Kaio-Sama");
-                        System.out.println("dado desplegado");
-                    }
-                    else{
-                        System.out.println("No se peude desplegar el dado");
-                    }
-                    
-               }
+                   }
+                }
             }
         }
+
+        
     }
 
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent e){
-        if (e.getWheelRotation()==1){
-            System.out.println(" Cambiar a figura " + numero);
-            if (numero>0){
-                numero-=1;
+        if (ultimo_boton==1){
+            if (e.getWheelRotation()==1){
+                System.out.println(" Cambiar a figura " + numero);
+                if (numero>0){
+                    numero-=1;
+                }
+                limpiar();
+
             }
-            limpiar();
+            else if(e.getWheelRotation()==-1){
+                System.out.println(" cambiar a figura: "+ numero);
+                if (numero<10){
+                    numero+=1;
+                } 
+                limpiar();
+            }
             
         }
-        else if(e.getWheelRotation()==-1){
-            System.out.println(" cambiar a figura: "+ numero);
-            if (numero<10){
-                numero+=1;
-            } 
-            limpiar();
-        }
+        
     }
     @Override
     public void mousePressed(MouseEvent e){
-        
-        if (e.getModifiersEx()==MouseEvent.BUTTON3_DOWN_MASK){
-            System.out.println("rotar las figuras 90 grados");
-            rotacion+=1;
-            if (rotacion==4){
-                rotacion=0;
+        if (ultimo_boton==1){
+            if (e.getModifiersEx()==MouseEvent.BUTTON3_DOWN_MASK){
+                System.out.println("rotar las figuras 90 grados");
+                rotacion+=1;
+                if (rotacion==4){
+                    rotacion=0;
+                }
+                limpiar();
+
             }
-            limpiar();
-                    
+            
         }
+        
+        
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        for (int i=0;i<15;i++){
-            for (int j=0;j<15;j++){
-               if (vistaTerreno.botones[i][j]==e.getSource()){
-                    System.out.println(" mouse sobre el boton!("+i+","+j+")" );
-                    //vistaTerreno.botones[i][j].setIcon(pasto);
-                    carasDado=dado.generarTerreno(i,j,numero,rotacion);
-                    metodo1(carasDado,true);
-                                       
-               }
+        if(ultimo_boton == 1){
+            for (int i=0;i<15;i++){
+                for (int j=0;j<15;j++){
+                   if (vistaTerreno.botones[i][j]==e.getSource()){
+                        System.out.println(" mouse sobre el boton!("+i+","+j+")" );
+                        //vistaTerreno.botones[i][j].setIcon(pasto);
+                        carasDado=dado.generarTerreno(i,j,numero,rotacion);
+                        metodo1(carasDado,true);
+
+                   }
+                }
             }
         }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        for (int i=0;i<15;i++){
-            for (int j=0;j<15;j++){
-               if (vistaTerreno.botones[i][j]==e.getSource()){
-                    System.out.println(" mouse sobre el boton!("+i+","+j+")" );
-                    //vistaTerreno.botones[i][j].setIcon(pasto);
-                    carasDado=dado.generarTerreno(i,j,numero,rotacion);
-                    metodo1(carasDado,false);
+        if(ultimo_boton == 1){
+            for (int i=0;i<15;i++){
+                for (int j=0;j<15;j++){
+                   if (vistaTerreno.botones[i][j]==e.getSource()){
+                        System.out.println(" mouse sobre el boton!("+i+","+j+")" );
+                        //vistaTerreno.botones[i][j].setIcon(pasto);
+                        carasDado=dado.generarTerreno(i,j,numero,rotacion);
+                        metodo1(carasDado,false);
+                    }
                 }
             }
+            
         }
+        
     }
   
     

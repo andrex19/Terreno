@@ -213,6 +213,7 @@ public class Dado {
     }
     
     
+    
 
     
    /* public int[][] forma1(int fila,int columna){
