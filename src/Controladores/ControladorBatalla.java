@@ -5,7 +5,6 @@
  */
 package Controladores;
 
-import Modelo.Casilla;
 import Modelo.Dado;
 import Modelo.Tablero;
 import Vista.VistaBatalla;
@@ -17,6 +16,7 @@ import java.awt.event.MouseWheelEvent;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.ImageIcon;
+
 
 
 /**
@@ -115,7 +115,7 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
     }
     
     
-    public void metodo1(int[][] carasDado, boolean boleano){
+    public void pintarTerrenoValido(int[][] carasDado, boolean boleano){
         boolean aux=true;
         if(boleano==true){
             aux=dado.verificarTerreno(carasDado,"Kaio-Sama",tablero);
@@ -233,7 +233,7 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
                         System.out.println(" mouse sobre el boton!("+i+","+j+")" );
                         //vistaTerreno.botones[i][j].setIcon(pasto);
                         carasDado=dado.generarTerreno(i,j,numero,rotacion);
-                        metodo1(carasDado,true);
+                        pintarTerrenoValido(carasDado,true);
 
                    }
                 }
@@ -250,7 +250,7 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
                         System.out.println(" mouse sobre el boton!("+i+","+j+")" );
                         //vistaTerreno.botones[i][j].setIcon(pasto);
                         carasDado=dado.generarTerreno(i,j,numero,rotacion);
-                        metodo1(carasDado,false);
+                        pintarTerrenoValido(carasDado,false);
                     }
                 }
             }
