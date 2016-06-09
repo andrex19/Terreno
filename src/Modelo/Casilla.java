@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 
 public class Casilla{
     public String terreno;
+    public Criatura criatura;
+    //Trampa trampa;
 
     public Casilla() {
         this.terreno = "";

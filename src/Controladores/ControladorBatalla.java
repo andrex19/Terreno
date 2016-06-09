@@ -62,14 +62,8 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
             }
         System.out.println(this.turnos);    
         }
-        
-        
-        
-        
     }
-    
-    
-       
+     
     public void verVista(MatrizTerreno cp) {
     
         this.cp=cp;
@@ -113,12 +107,10 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
             }
         }
     }
-    
-    
     public void pintarTerrenoValido(int[][] carasDado, boolean boleano){
         boolean aux=true;
         if(boleano==true){
-            aux=dado.verificarTerreno(carasDado,"Kaio-Sama",tablero);
+            aux=tablero.verificarTerreno(carasDado,"Kaio-Sama",tablero);
             if (aux){
                 for (int[]cara:carasDado){
                     if ((cara[0]>=0 && cara[0]<15 && cara[1]>=0 && cara[1]<15)){           
@@ -150,6 +142,7 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (vistaTerreno.getBtnInvocar()==e.getSource()){
+            
             ultimo_boton=1; //habilitar la funcionliadad para invocar 
         }
         if (ultimo_boton==1){
@@ -158,7 +151,7 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
                    if (vistaTerreno.botones[i][j]==e.getSource()){
                         System.out.println(" haz presionado el boton !("+i+","+j+")" );
                         carasDado=dado.generarTerreno(i,j,numero,rotacion);
-                        if (dado.verificarTerreno(carasDado,"Kaio-Sama",tablero)){
+                        if (tablero.verificarTerreno(carasDado,"Kaio-Sama",tablero)){
                             ponerFigura(carasDado,"Kaio-Sama");
                             System.out.println("dado desplegado");
                             ultimo_boton=0;
