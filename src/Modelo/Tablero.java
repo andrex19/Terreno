@@ -11,10 +11,12 @@ package Modelo;
  */
 public class Tablero {
     public Casilla[][] infoCasillas=new Casilla[15][15];
-    public void Tablero(){
+    public Tablero(){
+        System.out.println("hola tablero ");
         for (int i=0;i<15;i++){
             for (int j=0;j<15;j++){
                 this.infoCasillas[i][j]=new Casilla();
+                System.out.println("casilla creada ("+i+","+j+")");
             }
        
         

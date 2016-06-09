@@ -7,6 +7,7 @@ package Controladores;
 
 import Modelo.Casilla;
 import Modelo.Dado;
+import Modelo.Tablero;
 import Vista.VistaBatalla;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,17 +28,16 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
     VistaBatalla vistaTerreno;
     ImageIcon goku,rojo,verde,azul,kaio;
     Dado dado;
-    public Casilla[][] infoCasillas; 
     public int[][] carasDado;
     public static int numero=0;
     public static int rotacion=0;
     public ArrayList <Integer> turnos;
     public String ultimoBoton;
     private int ultimo_boton;
-    //public ControladorMover controladorMover;
-    //public ControladorInvocar controladorInvocar;
+    Tablero tablero;
 
     public ControladorBatalla() {
+        this.tablero = new Tablero();
         this.turnos = new ArrayList<Integer>();
         generarTurnos();
         this.dado = new Dado();
@@ -46,15 +46,7 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
         this.rojo = new ImageIcon(this.getClass().getResource("/Imagenes/rojo.png"));
         this.verde = new ImageIcon(this.getClass().getResource("/Imagenes/verde.png"));
         this.azul = new ImageIcon(this.getClass().getResource("/Imagenes/azul.png"));
-        this.infoCasillas = new Casilla[15][15];
-        for (int i=0;i<15;i++){
-            for (int j=0;j<15;j++){
-                infoCasillas[i][j]=new Casilla();
-                
-            }
-       
-        
-        }
+
         
     }
     public void generarTurnos(){
@@ -84,19 +76,22 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
         this.vistaTerreno=new VistaBatalla();
         this.vistaTerreno.setVisible(true);
         this.vistaTerreno.agregarListener(this,this); 
+        System.out.println("hola");
         ponerJefesTerreno("mio!","Kaio-Sama","pene","adsfadsf");
 
     }
     public void ponerJefesTerreno(String jefe1, String jefe2, String jefe3, String jefe4){
-         infoCasillas[0][7].terreno=jefe1;
-         infoCasillas[7][0].terreno=jefe2;/*  Aquí a cada terreno hay que darle el nombre de los distintos jefes de terreno*/
-         infoCasillas[7][14].terreno=jefe3;
-         infoCasillas[14][7].terreno=jefe4;
-         vistaTerreno.botones[0][7].setIcon(goku);
-         vistaTerreno.botones[7][0].setIcon(kaio);
-         /*vistaTerreno.botones[14][7].setIcon(goku);
-         vistaTerreno.botones[7][14].setIcon(goku);*/
-         
+        System.out.println(tablero.infoCasillas[0][7].terreno + "hola");
+        tablero.infoCasillas[0][7].terreno=jefe1;
+
+        tablero.infoCasillas[7][0].terreno=jefe2;/*  Aquí a cada terreno hay que darle el nombre de los distintos jefes de terreno*/
+        tablero.infoCasillas[7][14].terreno=jefe3;
+        tablero.infoCasillas[14][7].terreno=jefe4;
+        vistaTerreno.botones[0][7].setIcon(goku);
+        vistaTerreno.botones[7][0].setIcon(kaio);
+        /*vistaTerreno.botones[14][7].setIcon(goku);
+        vistaTerreno.botones[7][14].setIcon(goku);*/
+
     }
     
 
@@ -104,7 +99,7 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
                       
         for (int[]fila:carasDado){
             vistaTerreno.botones[fila[0]][fila[1]].setIcon(goku);
-            this.infoCasillas[fila[0]][fila[1]].terreno=jefe1;
+            tablero.infoCasillas[fila[0]][fila[1]].terreno=jefe1;
         }
         
      }
@@ -122,7 +117,7 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
            }  
            for (int[]cara:carasDado){
                 if ((cara[0]>=0 && cara[0]<15 && cara[1]>=0 && cara[1]<15)){
-                    if (infoCasillas[cara[0]][cara[1]].terreno.equals("")==false){
+                    if (tablero.infoCasillas[cara[0]][cara[1]].terreno.equals("")==false){
                         aux=false;
                     }
                 }
@@ -132,7 +127,7 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
     public void limpiar(){
         for (int i=0;i<15;i++){
             for (int j=0;j<15;j++){
-                if (infoCasillas[i][j].terreno.equals("")){
+                if (tablero.infoCasillas[i][j].terreno.equals("")){
                     vistaTerreno.botones[i][j].setIcon(null);
                 }
                 
@@ -144,22 +139,22 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
         for (int[]cara:carasDado){
             
                 if ((cara[0]+1>=0 && cara[0]+1<15 && cara[1]>=0 && cara[1]<15)){
-                    if (infoCasillas[cara[0]+1][cara[1]].terreno.equals(jefeTerreno)){
+                    if (tablero.infoCasillas[cara[0]+1][cara[1]].terreno.equals(jefeTerreno)){
                         return true ;
                     }
                 }
                 if ((cara[0]>=0 && cara[0]<15 && cara[1]+1>=0 && cara[1]+1<15)){
-                    if (infoCasillas[cara[0]][cara[1]+1].terreno.equals(jefeTerreno)){
+                    if (tablero.infoCasillas[cara[0]][cara[1]+1].terreno.equals(jefeTerreno)){
                         return true ;
                     }
                 }
                 if ((cara[0]-1>=0 && cara[0]-1<15 && cara[1]>=0 && cara[1]<15)){
-                    if (infoCasillas[cara[0]-1][cara[1]].terreno.equals(jefeTerreno)){
+                    if (tablero.infoCasillas[cara[0]-1][cara[1]].terreno.equals(jefeTerreno)){
                         return true ;
                     }
                 }
                 if ((cara[0]>=0 && cara[0]<15 && cara[1]-1>=0 && cara[1]-1<15)){
-                    if (infoCasillas[cara[0]][cara[1]-1].terreno.equals(jefeTerreno)){
+                    if (tablero.infoCasillas[cara[0]][cara[1]-1].terreno.equals(jefeTerreno)){
                         return true ;
                     }
                 }
@@ -179,7 +174,7 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
             if (aux){
                 for (int[]cara:carasDado){
                     if ((cara[0]>=0 && cara[0]<15 && cara[1]>=0 && cara[1]<15)){           
-                        if (infoCasillas[cara[0]][cara[1]].terreno.equals("")){
+                        if (tablero.infoCasillas[cara[0]][cara[1]].terreno.equals("")){
                             vistaTerreno.botones[cara[0]][cara[1]].setIcon(verde);     
                         }
                     }
@@ -189,7 +184,7 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
             else{
                 for (int[]cara:carasDado){
                     if ((cara[0]>=0 && cara[0]<15 && cara[1]>=0 && cara[1]<15)){           
-                        if (infoCasillas[cara[0]][cara[1]].terreno.equals("")){
+                        if (tablero.infoCasillas[cara[0]][cara[1]].terreno.equals("")){
                             vistaTerreno.botones[cara[0]][cara[1]].setIcon(rojo);     
                         }
                     }
