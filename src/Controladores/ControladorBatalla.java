@@ -32,9 +32,9 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
     public static int numero=0;
     public static int rotacion=0;
     public ArrayList <Integer> turnos;
-    public String ultimoBoton;
     private int ultimo_boton;
-    Tablero tablero;
+    public Tablero tablero;
+    public int turno;
 
     public ControladorBatalla() {
         this.tablero = new Tablero();
@@ -83,7 +83,6 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
     public void ponerJefesTerreno(String jefe1, String jefe2, String jefe3, String jefe4){
         System.out.println(tablero.infoCasillas[0][7].terreno + "hola");
         tablero.infoCasillas[0][7].terreno=jefe1;
-
         tablero.infoCasillas[7][0].terreno=jefe2;/*  Aquí a cada terreno hay que darle el nombre de los distintos jefes de terreno*/
         tablero.infoCasillas[7][14].terreno=jefe3;
         tablero.infoCasillas[14][7].terreno=jefe4;
@@ -103,27 +102,7 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
         }
         
      }
-    public boolean verificarTerreno(int[][]carasDado, String jefeTerreno){
-        boolean aux=false;
-        for (int[]cara:carasDado){
-                aux=verificarAdyacente(cara[0],cara[1],jefeTerreno);
-              
-                
-           }   
-           for (int[]cara:carasDado){
-                if (cara[0]<0 || cara[0]>14 || cara[1]<0 || cara[1]>14){
-                    aux=false;
-                    }
-           }  
-           for (int[]cara:carasDado){
-                if ((cara[0]>=0 && cara[0]<15 && cara[1]>=0 && cara[1]<15)){
-                    if (tablero.infoCasillas[cara[0]][cara[1]].terreno.equals("")==false){
-                        aux=false;
-                    }
-                }
-           }
-        return aux;
-    }
+
     public void limpiar(){
         for (int i=0;i<15;i++){
             for (int j=0;j<15;j++){
@@ -134,43 +113,12 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
             }
         }
     }
-    public boolean verificarAdyacente(int x, int y,String jefeTerreno){
-        boolean aux=false;
-        for (int[]cara:carasDado){
-            
-                if ((cara[0]+1>=0 && cara[0]+1<15 && cara[1]>=0 && cara[1]<15)){
-                    if (tablero.infoCasillas[cara[0]+1][cara[1]].terreno.equals(jefeTerreno)){
-                        return true ;
-                    }
-                }
-                if ((cara[0]>=0 && cara[0]<15 && cara[1]+1>=0 && cara[1]+1<15)){
-                    if (tablero.infoCasillas[cara[0]][cara[1]+1].terreno.equals(jefeTerreno)){
-                        return true ;
-                    }
-                }
-                if ((cara[0]-1>=0 && cara[0]-1<15 && cara[1]>=0 && cara[1]<15)){
-                    if (tablero.infoCasillas[cara[0]-1][cara[1]].terreno.equals(jefeTerreno)){
-                        return true ;
-                    }
-                }
-                if ((cara[0]>=0 && cara[0]<15 && cara[1]-1>=0 && cara[1]-1<15)){
-                    if (tablero.infoCasillas[cara[0]][cara[1]-1].terreno.equals(jefeTerreno)){
-                        return true ;
-                    }
-                }
-                
-            }
-        return aux;    
-    }
     
     
     public void metodo1(int[][] carasDado, boolean boleano){
         boolean aux=true;
         if(boleano==true){
-            aux=verificarTerreno(carasDado,"Kaio-Sama");
-               
-            
-            
+            aux=dado.verificarTerreno(carasDado,"Kaio-Sama",tablero);
             if (aux){
                 for (int[]cara:carasDado){
                     if ((cara[0]>=0 && cara[0]<15 && cara[1]>=0 && cara[1]<15)){           
@@ -191,8 +139,6 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
                 }
                 
             }
-            
-            
         }
         else{
             limpiar();
@@ -204,7 +150,7 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (vistaTerreno.getBtnInvocar()==e.getSource()){
-            ultimo_boton=1;
+            ultimo_boton=1; //habilitar la funcionliadad para invocar 
         }
         if (ultimo_boton==1){
             for (int i=0;i<15;i++){
@@ -212,7 +158,7 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
                    if (vistaTerreno.botones[i][j]==e.getSource()){
                         System.out.println(" haz presionado el boton !("+i+","+j+")" );
                         carasDado=dado.generarTerreno(i,j,numero,rotacion);
-                        if (verificarTerreno(carasDado,"Kaio-Sama")){
+                        if (dado.verificarTerreno(carasDado,"Kaio-Sama",tablero)){
                             ponerFigura(carasDado,"Kaio-Sama");
                             System.out.println("dado desplegado");
                             ultimo_boton=0;
@@ -224,6 +170,14 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
                    }
                 }
             }
+        }
+        if (vistaTerreno.getBtnFinalizar()==e.getSource()){
+            System.out.println("finalizar turno");
+            turno+=1;
+            if (turno==4){
+                turno=0;
+            }
+            System.out.println("turno: "+turno);
         }
 
         

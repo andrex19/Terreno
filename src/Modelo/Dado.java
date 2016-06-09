@@ -211,7 +211,62 @@ public class Dado {
         }
     return carasDado;
     }
-    
+
+    // metodo para verificar si todas las caras de la figura a desplegar esta adyacente a terreno propio
+    public boolean verificarAdyacente(int[][] carasDado,String jefeTerreno, Tablero tablero){
+        
+        boolean aux=false;
+        for (int[]cara:carasDado){
+            
+                if ((cara[0]+1>=0 && cara[0]+1<15 && cara[1]>=0 && cara[1]<15)){
+                    if (tablero.infoCasillas[cara[0]+1][cara[1]].terreno.equals(jefeTerreno)){
+                        return true ;
+                    }
+                }
+                if ((cara[0]>=0 && cara[0]<15 && cara[1]+1>=0 && cara[1]+1<15)){
+                    if (tablero.infoCasillas[cara[0]][cara[1]+1].terreno.equals(jefeTerreno)){
+                        return true ;
+                    }
+                }
+                if ((cara[0]-1>=0 && cara[0]-1<15 && cara[1]>=0 && cara[1]<15)){
+                    if (tablero.infoCasillas[cara[0]-1][cara[1]].terreno.equals(jefeTerreno)){
+                        return true ;
+                    }
+                }
+                if ((cara[0]>=0 && cara[0]<15 && cara[1]-1>=0 && cara[1]-1<15)){
+                    if (tablero.infoCasillas[cara[0]][cara[1]-1].terreno.equals(jefeTerreno)){
+                        return true ;
+                    }
+                }
+                
+            }
+        return aux;    
+    }
+    //metodo para verificar si se peude poner la figura a desplegar 
+    // 1) verificar adyacente
+    // 2) verificar si esta dentro de la matriz
+    // 3) verificar si donde se esta poniendo la figura no esta ocupada por alguien
+    public boolean verificarTerreno(int[][]carasDado, String jefeTerreno,Tablero tablero){
+        boolean aux=false;
+        for (int[]cara:carasDado){
+                aux=verificarAdyacente(carasDado,jefeTerreno, tablero);
+              
+                
+           }   
+           for (int[]cara:carasDado){
+                if (cara[0]<0 || cara[0]>14 || cara[1]<0 || cara[1]>14){
+                    aux=false;
+                    }
+           }  
+           for (int[]cara:carasDado){
+                if ((cara[0]>=0 && cara[0]<15 && cara[1]>=0 && cara[1]<15)){
+                    if (tablero.infoCasillas[cara[0]][cara[1]].terreno.equals("")==false){
+                        aux=false;
+                    }
+                }
+           }
+        return aux;
+    }
     
     
 
