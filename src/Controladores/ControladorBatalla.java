@@ -5,6 +5,7 @@
  */
 package Controladores;
 
+import Modelo.Criatura;
 import Modelo.Dado;
 import Modelo.Jugador;
 import Modelo.Tablero;
@@ -26,6 +27,7 @@ import javax.swing.ImageIcon;
  */
 public class ControladorBatalla extends MouseAdapter implements ActionListener{
     MatrizTerreno cp;
+    ControladorElegirDados controladorElegirDados;
     VistaBatalla vistaTerreno;
     ImageIcon goku,rojo,verde,azul,kaio;
     Dado dado;
@@ -37,11 +39,11 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
     public Tablero tablero;
     public int turno;
     public Jugador jugadorActual;
-    //public String Andres;
     ArrayList<Jugador> arregloJugadores = new ArrayList<Jugador>();
     
 
     public ControladorBatalla() {
+        this.controladorElegirDados=new ControladorElegirDados();
         this.tablero = new Tablero();
         this.ordenTurnos = new ArrayList<Integer>();
         this.dado = new Dado();
@@ -50,6 +52,7 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
         this.rojo = new ImageIcon(this.getClass().getResource("/Imagenes/rojo.png"));
         this.verde = new ImageIcon(this.getClass().getResource("/Imagenes/verde.png"));
         this.azul = new ImageIcon(this.getClass().getResource("/Imagenes/azul.png"));
+        
 
         
     }
@@ -93,10 +96,10 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
         tablero.infoCasillas[7][0].terreno=jugador2;/*  Aquí a cada terreno hay que darle el nombre de los distintos jefes de terreno*/
         tablero.infoCasillas[7][14].terreno=jugador3;
         tablero.infoCasillas[14][7].terreno=jugador4;
-        vistaTerreno.botones[0][7].setIcon(goku);
-        vistaTerreno.botones[7][0].setIcon(kaio);
-        vistaTerreno.botones[14][7].setIcon(goku);
-        vistaTerreno.botones[7][14].setIcon(kaio);
+        vistaTerreno.botones[0][7].setIcon(arregloJugadores.get(0).jefeTerreno.imagen);
+        vistaTerreno.botones[7][0].setIcon(arregloJugadores.get(1).jefeTerreno.imagen);
+        vistaTerreno.botones[14][7].setIcon(arregloJugadores.get(2).jefeTerreno.imagen);
+        vistaTerreno.botones[7][14].setIcon(arregloJugadores.get(3).jefeTerreno.imagen);
         System.out.println(tablero.infoCasillas[0][7].terreno+ " terreno puesto en poner terreno");
         System.out.println(tablero.infoCasillas[7][0].terreno+ " terreno puesto en poner terreno");
         System.out.println(tablero.infoCasillas[14][7].terreno+ " terreno puesto en poner terreno");
@@ -109,14 +112,22 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
     }
     
 
-    public void ponerFigura(int[][] carasDado,String jefe1){
+    public void ponerFiguraDado(int[][] carasDado,String jefe1, ImageIcon imagen){
                       
         for (int[]fila:carasDado){
-            vistaTerreno.botones[fila[0]][fila[1]].setIcon(goku);
+            vistaTerreno.botones[fila[0]][fila[1]].setIcon(imagen);
             tablero.infoCasillas[fila[0]][fila[1]].terreno=jefe1;
         }
         
-     }
+    }
+    public void invocarCriatura(int[][] carasDado,Criatura criatura){
+        int n = (int)Math.round((5)*Math.random());
+        int x = carasDado[n][0];
+        int y = carasDado[n][1];
+                
+        vistaTerreno.botones[x][y].setIcon(azul);
+        tablero.infoCasillas[x][y].criatura=criatura;
+    }
 
     public void limpiar(){
         for (int i=0;i<15;i++){
@@ -163,7 +174,7 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (vistaTerreno.getBtnInvocar()==e.getSource()){
-            
+            System.out.println("click en boton invocar criatura");          
             ultimo_boton=1; //habilitar la funcionliadad para invocar 
         }
         if (ultimo_boton==1){
@@ -171,10 +182,12 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
                 for (int j=0;j<15;j++){
                    if (vistaTerreno.botones[i][j]==e.getSource()){
                         System.out.println(" haz presionado el boton !("+i+","+j+")" );
+                        dado=jugadorActual.puzle.puzzle[1];
                         carasDado=dado.generarTerreno(i,j,numero,rotacion);
                         if (tablero.verificarTerreno(carasDado,jugadorActual.usuario,tablero)){
-                            ponerFigura(carasDado,jugadorActual.usuario);
-                            System.out.println("dado desplegado");
+                            ponerFiguraDado(carasDado,jugadorActual.usuario,jugadorActual.jefeTerreno.imagen);
+                            invocarCriatura(carasDado,dado.criatura);
+                            System.out.println("criatura invocada");
                             ultimo_boton=0;
                         }
                         else{
@@ -186,7 +199,7 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
             }
         }
         if (vistaTerreno.getBtnFinalizar()==e.getSource()){
-            System.out.println("finalizar turno");
+            System.out.println("click en boton finalizar turno");
             turno+=1;
             if (turno==4){
                 turno=0;
@@ -201,6 +214,20 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener{
             System.out.println(jugadorActual.usuario);
 
         }
+        if (vistaTerreno.getBtnLanzar()==e.getSource()){
+            System.out.println("click en boton lanzar");
+            this.controladorElegirDados.verVista(jugadorActual.puzle);
+        }
+        if (vistaTerreno.getBtnMagia()==e.getSource()){
+            System.out.println("click en boton magia");
+        }
+        if (vistaTerreno.getBtnMover()==e.getSource()){
+            System.out.println("click en boton mover");
+        }
+        if (vistaTerreno.getBtnTrampa()==e.getSource()){
+            System.out.println("click en boton trampa");
+        }
+        
     }
 
 

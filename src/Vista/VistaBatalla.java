@@ -48,6 +48,10 @@ public class VistaBatalla extends javax.swing.JFrame {
         panelTerreno = new javax.swing.JPanel();
         btnInvocar = new javax.swing.JButton();
         btnFinalizar = new javax.swing.JButton();
+        btnMover = new javax.swing.JButton();
+        btnLanzar = new javax.swing.JButton();
+        btnMagia = new javax.swing.JButton();
+        btnTrampa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,6 +67,14 @@ public class VistaBatalla extends javax.swing.JFrame {
 
         btnFinalizar.setText("Finalizar turno");
 
+        btnMover.setText("Mover criatura");
+
+        btnLanzar.setText("Lanzar dado");
+
+        btnMagia.setText("Activar magia");
+
+        btnTrampa.setText("Poner Trampa");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -70,25 +82,42 @@ public class VistaBatalla extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelTerreno, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnInvocar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnFinalizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnLanzar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnMagia, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnTrampa, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnFinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnInvocar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnMover, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(btnInvocar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnFinalizar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(panelTerreno, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(panelTerreno, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(97, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLanzar)
+                    .addComponent(btnFinalizar))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMagia)
+                    .addComponent(btnTrampa))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMover)
+                    .addComponent(btnInvocar))
+                .addGap(62, 62, 62))
         );
 
         pack();
@@ -137,6 +166,10 @@ public class VistaBatalla extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFinalizar;
     private javax.swing.JButton btnInvocar;
+    private javax.swing.JButton btnLanzar;
+    private javax.swing.JButton btnMagia;
+    private javax.swing.JButton btnMover;
+    private javax.swing.JButton btnTrampa;
     private javax.swing.JPanel panelTerreno;
     // End of variables declaration//GEN-END:variables
     
@@ -154,6 +187,14 @@ public class VistaBatalla extends javax.swing.JFrame {
         this.panelTerreno.addMouseWheelListener(ml);
         this.btnInvocar.addActionListener(al);
         this.btnFinalizar.addActionListener(al);
+        this.btnLanzar.addActionListener(al);
+        this.btnMagia.addActionListener(al);
+        this.btnMover.addActionListener(al);
+        this.btnTrampa.addActionListener(al);
+        
+        
+        
+        
     }
     public JButton getBtnInvocar(){
         return this.btnInvocar;
@@ -166,6 +207,18 @@ public class VistaBatalla extends javax.swing.JFrame {
     }
     public JButton getBtnFinalizar(){
         return this.btnFinalizar;
+    }
+    public JButton getBtnLanzar(){
+        return this.btnLanzar;
+    }
+    public JButton getBtnMagia(){
+        return this.btnMagia;
+    }
+    public JButton getBtnMover(){
+        return this.btnMover;
+    }
+    public JButton getBtnTrampa(){
+        return this.btnTrampa;
     }
     
     

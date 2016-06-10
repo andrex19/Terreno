@@ -1,198 +1,200 @@
 package Modelo;
 
+import java.util.ArrayList;
+
 public class Dado {
-    public int carasDado[][];
+    public int posicionCarasDado[][];
     public Criatura criatura;
 
     public Dado() {
-        this.carasDado = new int[6][2];
+        this.posicionCarasDado = new int[6][2];
         this.criatura=new Criatura();
     }
 
     public int[][] generarTerreno(int f,int c,int num,int rot){
-    int[][] carasDado =  new int[6][2];
+    int[][] posicionCarasDado =  new int[6][2];
         if (num==0){
        
                 //figura 1,1
-                carasDado[0][0]=f;
-                carasDado[0][1]=c;
-                carasDado[1][0]=f+1;
-                carasDado[1][1]=c;
-                carasDado[2][0]=f+2;
-                carasDado[2][1]=c;
-                carasDado[3][0]=f+3;
-                carasDado[3][1]=c;
-                carasDado[4][0]=f+2;
-                carasDado[4][1]=c-1;
-                carasDado[5][0]=f+2;
-                carasDado[5][1]=c+1;
+                posicionCarasDado[0][0]=f;
+                posicionCarasDado[0][1]=c;
+                posicionCarasDado[1][0]=f+1;
+                posicionCarasDado[1][1]=c;
+                posicionCarasDado[2][0]=f+2;
+                posicionCarasDado[2][1]=c;
+                posicionCarasDado[3][0]=f+3;
+                posicionCarasDado[3][1]=c;
+                posicionCarasDado[4][0]=f+2;
+                posicionCarasDado[4][1]=c-1;
+                posicionCarasDado[5][0]=f+2;
+                posicionCarasDado[5][1]=c+1;
         }
         else if (num==1){
                 //figura 2,1
-                carasDado[0][0]=f;
-                carasDado[0][1]=c;
-                carasDado[1][0]=f-1;
-                carasDado[1][1]=c;
-                carasDado[2][0]=f-2;
-                carasDado[2][1]=c;
-                carasDado[3][0]=f-3;
-                carasDado[3][1]=c;
-                carasDado[4][0]=f-3;
-                carasDado[4][1]=c-1;
-                carasDado[5][0]=f-3;
-                carasDado[5][1]=c+1;
+                posicionCarasDado[0][0]=f;
+                posicionCarasDado[0][1]=c;
+                posicionCarasDado[1][0]=f-1;
+                posicionCarasDado[1][1]=c;
+                posicionCarasDado[2][0]=f-2;
+                posicionCarasDado[2][1]=c;
+                posicionCarasDado[3][0]=f-3;
+                posicionCarasDado[3][1]=c;
+                posicionCarasDado[4][0]=f-3;
+                posicionCarasDado[4][1]=c-1;
+                posicionCarasDado[5][0]=f-3;
+                posicionCarasDado[5][1]=c+1;
         }
         else if (num==2){
                 //figura 1,2
-                carasDado[0][0]=f;
-                carasDado[0][1]=c;
-                carasDado[1][0]=f-1;
-                carasDado[1][1]=c;
-                carasDado[2][0]=f-2;
-                carasDado[2][1]=c;
-                carasDado[3][0]=f-2;
-                carasDado[3][1]=c-1;
-                carasDado[4][0]=f-3;
-                carasDado[4][1]=c-1;
-                carasDado[5][0]=f-4;
-                carasDado[5][1]=c-1;
+                posicionCarasDado[0][0]=f;
+                posicionCarasDado[0][1]=c;
+                posicionCarasDado[1][0]=f-1;
+                posicionCarasDado[1][1]=c;
+                posicionCarasDado[2][0]=f-2;
+                posicionCarasDado[2][1]=c;
+                posicionCarasDado[3][0]=f-2;
+                posicionCarasDado[3][1]=c-1;
+                posicionCarasDado[4][0]=f-3;
+                posicionCarasDado[4][1]=c-1;
+                posicionCarasDado[5][0]=f-4;
+                posicionCarasDado[5][1]=c-1;
         }
         else if (num==3){
                 //figura 2, 2  
-                carasDado[0][0]=f;
-                carasDado[0][1]=c;
-                carasDado[1][0]=f-1;
-                carasDado[1][1]=c;
-                carasDado[2][0]=f-2;
-                carasDado[2][1]=c;
-                carasDado[3][0]=f-2;
-                carasDado[3][1]=c+1;
-                carasDado[4][0]=f-3;
-                carasDado[4][1]=c+1;
-                carasDado[5][0]=f-4;
-                carasDado[5][1]=c+1;
+                posicionCarasDado[0][0]=f;
+                posicionCarasDado[0][1]=c;
+                posicionCarasDado[1][0]=f-1;
+                posicionCarasDado[1][1]=c;
+                posicionCarasDado[2][0]=f-2;
+                posicionCarasDado[2][1]=c;
+                posicionCarasDado[3][0]=f-2;
+                posicionCarasDado[3][1]=c+1;
+                posicionCarasDado[4][0]=f-3;
+                posicionCarasDado[4][1]=c+1;
+                posicionCarasDado[5][0]=f-4;
+                posicionCarasDado[5][1]=c+1;
         }
         else if (num==4){
                 //figura1,3
-                carasDado[0][0]=f;
-                carasDado[0][1]=c;
-                carasDado[1][0]=f-1;
-                carasDado[1][1]=c;
-                carasDado[2][0]=f-1;
-                carasDado[2][1]=c+1;
-                carasDado[3][0]=f-2;
-                carasDado[3][1]=c+1;
-                carasDado[4][0]=f-2;
-                carasDado[4][1]=c+2;
-                carasDado[5][0]=f-3;
-                carasDado[5][1]=c+2;
+                posicionCarasDado[0][0]=f;
+                posicionCarasDado[0][1]=c;
+                posicionCarasDado[1][0]=f-1;
+                posicionCarasDado[1][1]=c;
+                posicionCarasDado[2][0]=f-1;
+                posicionCarasDado[2][1]=c+1;
+                posicionCarasDado[3][0]=f-2;
+                posicionCarasDado[3][1]=c+1;
+                posicionCarasDado[4][0]=f-2;
+                posicionCarasDado[4][1]=c+2;
+                posicionCarasDado[5][0]=f-3;
+                posicionCarasDado[5][1]=c+2;
         }
         else if (num==5){
                 //figura 1,4
-                carasDado[0][0]=f;
-                carasDado[0][1]=c;
-                carasDado[1][0]=f;
-                carasDado[1][1]=c-1;
-                carasDado[2][0]=f-1;
-                carasDado[2][1]=c-1;
-                carasDado[3][0]=f-2;
-                carasDado[3][1]=c-1;
-                carasDado[4][0]=f-3;
-                carasDado[4][1]=c-1;
-                carasDado[5][0]=f-3;
-                carasDado[5][1]=c-2;
+                posicionCarasDado[0][0]=f;
+                posicionCarasDado[0][1]=c;
+                posicionCarasDado[1][0]=f;
+                posicionCarasDado[1][1]=c-1;
+                posicionCarasDado[2][0]=f-1;
+                posicionCarasDado[2][1]=c-1;
+                posicionCarasDado[3][0]=f-2;
+                posicionCarasDado[3][1]=c-1;
+                posicionCarasDado[4][0]=f-3;
+                posicionCarasDado[4][1]=c-1;
+                posicionCarasDado[5][0]=f-3;
+                posicionCarasDado[5][1]=c-2;
         }
         else if (num==6){
                 //figura 1,5
-                carasDado[0][0]=f;
-                carasDado[0][1]=c;
-                carasDado[1][0]=f-1;
-                carasDado[1][1]=c;
-                carasDado[2][0]=f-1;
-                carasDado[2][1]=c-1;
-                carasDado[3][0]=f-2;
-                carasDado[3][1]=c-1;
-                carasDado[4][0]=f-3;
-                carasDado[4][1]=c-1;
-                carasDado[5][0]=f-2;
-                carasDado[5][1]=c-2;
+                posicionCarasDado[0][0]=f;
+                posicionCarasDado[0][1]=c;
+                posicionCarasDado[1][0]=f-1;
+                posicionCarasDado[1][1]=c;
+                posicionCarasDado[2][0]=f-1;
+                posicionCarasDado[2][1]=c-1;
+                posicionCarasDado[3][0]=f-2;
+                posicionCarasDado[3][1]=c-1;
+                posicionCarasDado[4][0]=f-3;
+                posicionCarasDado[4][1]=c-1;
+                posicionCarasDado[5][0]=f-2;
+                posicionCarasDado[5][1]=c-2;
         }
         else if (num==7){
                 // esta mala!
-                carasDado[0][0]=f;
-                carasDado[0][1]=c;
-                carasDado[1][0]=f-1;
-                carasDado[1][1]=c;
-                carasDado[2][0]=f-2;
-                carasDado[2][1]=c;
-                carasDado[3][0]=f-2;
-                carasDado[3][1]=c+1;
-                carasDado[4][0]=f-3;
-                carasDado[4][1]=c+1;
-                carasDado[5][0]=f-4;
-                carasDado[5][1]=c+1;
+                posicionCarasDado[0][0]=f;
+                posicionCarasDado[0][1]=c;
+                posicionCarasDado[1][0]=f-1;
+                posicionCarasDado[1][1]=c;
+                posicionCarasDado[2][0]=f-2;
+                posicionCarasDado[2][1]=c;
+                posicionCarasDado[3][0]=f-2;
+                posicionCarasDado[3][1]=c+1;
+                posicionCarasDado[4][0]=f-3;
+                posicionCarasDado[4][1]=c+1;
+                posicionCarasDado[5][0]=f-4;
+                posicionCarasDado[5][1]=c+1;
         }
         else if (num==8){
                 //figura 2,3
-                carasDado[0][0]=f;
-                carasDado[0][1]=c;
-                carasDado[1][0]=f-1;
-                carasDado[1][1]=c;
-                carasDado[2][0]=f-1;
-                carasDado[2][1]=c-1;
-                carasDado[3][0]=f-2;
-                carasDado[3][1]=c-1;
-                carasDado[4][0]=f-2;
-                carasDado[4][1]=c-2;
-                carasDado[5][0]=f-3;
-                carasDado[5][1]=c-2;
+                posicionCarasDado[0][0]=f;
+                posicionCarasDado[0][1]=c;
+                posicionCarasDado[1][0]=f-1;
+                posicionCarasDado[1][1]=c;
+                posicionCarasDado[2][0]=f-1;
+                posicionCarasDado[2][1]=c-1;
+                posicionCarasDado[3][0]=f-2;
+                posicionCarasDado[3][1]=c-1;
+                posicionCarasDado[4][0]=f-2;
+                posicionCarasDado[4][1]=c-2;
+                posicionCarasDado[5][0]=f-3;
+                posicionCarasDado[5][1]=c-2;
         }
         else if (num==9){
                 //figura2,4
-                carasDado[0][0]=f;
-                carasDado[0][1]=c;
-                carasDado[1][0]=f;
-                carasDado[1][1]=c+1;
-                carasDado[2][0]=f-1;
-                carasDado[2][1]=c+1;
-                carasDado[3][0]=f-2;
-                carasDado[3][1]=c+1;
-                carasDado[4][0]=f-3;
-                carasDado[4][1]=c+1;
-                carasDado[5][0]=f-3;
-                carasDado[5][1]=c+2;
+                posicionCarasDado[0][0]=f;
+                posicionCarasDado[0][1]=c;
+                posicionCarasDado[1][0]=f;
+                posicionCarasDado[1][1]=c+1;
+                posicionCarasDado[2][0]=f-1;
+                posicionCarasDado[2][1]=c+1;
+                posicionCarasDado[3][0]=f-2;
+                posicionCarasDado[3][1]=c+1;
+                posicionCarasDado[4][0]=f-3;
+                posicionCarasDado[4][1]=c+1;
+                posicionCarasDado[5][0]=f-3;
+                posicionCarasDado[5][1]=c+2;
         }
         else if (num==10){
                 //figura 2,5
-                carasDado[0][0]=f;
-                carasDado[0][1]=c;
-                carasDado[1][0]=f-1;
-                carasDado[1][1]=c;
-                carasDado[2][0]=f-1;
-                carasDado[2][1]=c+1;
-                carasDado[3][0]=f-2;
-                carasDado[3][1]=c+1;
-                carasDado[4][0]=f-3;
-                carasDado[4][1]=c+1;
-                carasDado[5][0]=f-2;
-                carasDado[5][1]=c+2;
+                posicionCarasDado[0][0]=f;
+                posicionCarasDado[0][1]=c;
+                posicionCarasDado[1][0]=f-1;
+                posicionCarasDado[1][1]=c;
+                posicionCarasDado[2][0]=f-1;
+                posicionCarasDado[2][1]=c+1;
+                posicionCarasDado[3][0]=f-2;
+                posicionCarasDado[3][1]=c+1;
+                posicionCarasDado[4][0]=f-3;
+                posicionCarasDado[4][1]=c+1;
+                posicionCarasDado[5][0]=f-2;
+                posicionCarasDado[5][1]=c+2;
         }
         if (rot==1){
-            girarTerreno(carasDado);
+            girarTerreno(posicionCarasDado);
         }
             
         
         else if (rot==2){
-            girarTerreno(carasDado);
-            girarTerreno(carasDado);
+            girarTerreno(posicionCarasDado);
+            girarTerreno(posicionCarasDado);
         }
         else if (rot==3){
-            girarTerreno(carasDado);
-            girarTerreno(carasDado);
-            girarTerreno(carasDado);
+            girarTerreno(posicionCarasDado);
+            girarTerreno(posicionCarasDado);
+            girarTerreno(posicionCarasDado);
             
         }
-    return carasDado;
+    return posicionCarasDado;
         }
     public int[][] girarTerreno(int[][] carasDado){
         int f = carasDado[0][0];
@@ -213,6 +215,67 @@ public class Dado {
         }
     return carasDado;
     }
+    //Metodos//
+    //arraylist caras con las 6 caras del dado
+    //arraylist puntos del Usuario en el orden (atk, mov, mag, tramp,inv)
+    public void lanzarDado(String [] caras, int[] puntos){
+        int n = (int)Math.round((6 - 1)*Math.random());
+        String caraDado = caras[n];
+        if(caraDado == "Atk"){
+            puntos[0] = puntos[0] + 1;
+            System.out.println("Obtuvo 1 punto de Ataque");
+        }
+        else if(caraDado == "Mov"){
+            puntos[1] = puntos[1] + 1;         
+            System.out.println("Obtuvo 1 punto de Movimiento");    
+        }
+        else if(caraDado == "Mag"){
+            puntos[2] = puntos[2] + 1;
+            System.out.println("Obtuvo 1 punto de Magia");
+        }
+        else if(caraDado == "Tramp"){
+            puntos[3] = puntos[3] + 1;
+            System.out.println("Obtuvo 1 punto de Trampa");
+        }
+        else if(caraDado == "Inv"){
+            puntos[4] = puntos[4] + 1;
+            System.out.println("Obtuvo 1 punto de Invocacion");
+        }
+        if(caraDado == "AtkX2"){
+            puntos[0] = puntos[0] + 2;
+            System.out.println("Obtuvo 2 punto de Ataque");
+        }
+        else if(caraDado == "MovX2"){
+            puntos[1] = puntos[1] + 2;          
+            System.out.println("Obtuvo 2 punto de Movimiento");    
+        }
+        else if(caraDado == "MagX2"){
+            puntos[2] = puntos[2] + 2;
+            System.out.println("Obtuvo 2 punto de Magia");
+        }
+        else if(caraDado == "TrampX2"){
+            puntos[3] = puntos[3] + 2;
+            System.out.println("Obtuvo 2 punto de Trampa");
+        }
+        if(caraDado == "AtkX3"){
+            puntos[0] = puntos[0] + 3;
+            System.out.println("Obtuvo 3 punto de Ataque");
+        }
+        else if(caraDado == "MovX3"){
+            puntos[1] = puntos[1] + 3;         
+            System.out.println("Obtuvo 3 punto de Movimiento");    
+        }
+        else if(caraDado == "MagX3"){
+            puntos[2] = puntos[2] + 3;
+            System.out.println("Obtuvo 3 punto de Magia");
+        }
+        else if(caraDado == "TrampX3"){
+            puntos[3] = puntos[3] + 3; 
+            System.out.println("Obtuvo 3 punto de Trampa");
+        }
+        
+    }
+}
 
 
     
@@ -223,4 +286,4 @@ public class Dado {
         return carasDado[][];*/
     
     
-}
+

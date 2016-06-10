@@ -13,6 +13,7 @@ public class Jugador {
     public String contraseña;
     public PuzzleDados puzle;
     public JefeTerreno jefeTerreno;
+    public int[] puntos;
 
     
     public Jugador(String usuario, String contraseña, PuzzleDados puzle, JefeTerreno jefeTerreno){
@@ -20,8 +21,8 @@ public class Jugador {
         this.contraseña=contraseña;
         this.puzle=puzle;
         this.jefeTerreno=jefeTerreno;
-
-            
+        puntos = new int[5];
+        //ataque, movimiento, magia, trampa, invocacion.
     }
     
     
