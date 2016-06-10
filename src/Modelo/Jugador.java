@@ -9,17 +9,18 @@ import java.util.ArrayList;
 
 
 public class Jugador {
-    private String usuario;
-    private String contraseña;
+    public String usuario;
+    public String contraseña;
     public PuzzleDados puzle;
     public JefeTerreno jefeTerreno;
+
     
     public Jugador(String usuario, String contraseña, PuzzleDados puzle, JefeTerreno jefeTerreno){
         this.usuario=usuario;
         this.contraseña=contraseña;
         this.puzle=puzle;
         this.jefeTerreno=jefeTerreno;
-        
+
             
     }
     

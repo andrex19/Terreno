@@ -18,8 +18,8 @@ public class JefeTerreno {
     
     
     
-    public JefeTerreno(String nombre){
-        this.nombre=nombre;
+    public JefeTerreno(){}
+        /*this.nombre=nombre;
         //Construir de forma diferente para el nombre que se entrega
         if (nombre.equals("Goku")){ 
         }
@@ -32,6 +32,7 @@ public class JefeTerreno {
         }
 
     }
+*/
     
     
     
