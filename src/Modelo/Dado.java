@@ -264,55 +264,55 @@ public class Dado {
     public void lanzarDado(String [] caras, int[] puntos){
         int n = (int)Math.round((5)*Math.random());
         String caraDado = this.caras[n];
-        if(caraDado == "Atk"){
+        if("Atk".equals(caraDado)){
             puntos[0] = puntos[0] + 1;
             System.out.println("Obtuvo 1 punto de Ataque");
         }
-        else if(caraDado == "Mov"){
+        else if("Mov".equals(caraDado)){
             puntos[1] = puntos[1] + 1;         
             System.out.println("Obtuvo 1 punto de Movimiento");    
         }
-        else if(caraDado == "Mag"){
+        else if("Mag".equals(caraDado)){
             puntos[2] = puntos[2] + 1;
             System.out.println("Obtuvo 1 punto de Magia");
         }
-        else if(caraDado == "Tramp"){
+        else if("Tramp".equals(caraDado)){
             puntos[3] = puntos[3] + 1;
             System.out.println("Obtuvo 1 punto de Trampa");
         }
-        else if(caraDado == "Inv"){
+        else if("Inv".equals(caraDado)){
             puntos[4] = puntos[4] + 1;
             System.out.println("Obtuvo 1 punto de Invocacion");
         }
-        if(caraDado == "AtkX2"){
+        if("AtkX2".equals(caraDado)){
             puntos[0] = puntos[0] + 2;
             System.out.println("Obtuvo 2 punto de Ataque");
         }
-        else if(caraDado == "MovX2"){
+        else if("MovX2".equals(caraDado)){
             puntos[1] = puntos[1] + 2;          
             System.out.println("Obtuvo 2 punto de Movimiento");    
         }
-        else if(caraDado == "MagX2"){
+        else if("MagX2".equals(caraDado)){
             puntos[2] = puntos[2] + 2;
             System.out.println("Obtuvo 2 punto de Magia");
         }
-        else if(caraDado == "TrampX2"){
+        else if("TrampX2".equals(caraDado)){
             puntos[3] = puntos[3] + 2;
             System.out.println("Obtuvo 2 punto de Trampa");
         }
-        if(caraDado == "AtkX3"){
+        if("AtkX3".equals(caraDado)){
             puntos[0] = puntos[0] + 3;
             System.out.println("Obtuvo 3 punto de Ataque");
         }
-        else if(caraDado == "MovX3"){
+        else if("MovX3".equals(caraDado)){
             puntos[1] = puntos[1] + 3;         
             System.out.println("Obtuvo 3 punto de Movimiento");    
         }
-        else if(caraDado == "MagX3"){
+        else if("MagX3".equals(caraDado)){
             puntos[2] = puntos[2] + 3;
             System.out.println("Obtuvo 3 punto de Magia");
         }
-        else if(caraDado == "TrampX3"){
+        else if("TrampX3".equals(caraDado)){
             puntos[3] = puntos[3] + 3; 
             System.out.println("Obtuvo 3 punto de Trampa");
         }
