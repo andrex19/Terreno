@@ -5,10 +5,30 @@ import java.util.ArrayList;
 public class Dado {
     public int posicionCarasDado[][];
     public Criatura criatura;
+    public String[] caras;
+    
 
-    public Dado() {
-        this.posicionCarasDado = new int[6][2];
-        this.criatura=new Criatura();
+    public Dado(int numero) {
+        if (numero==1){
+            this.posicionCarasDado = new int[6][2];
+            this.criatura=new Criatura();
+            this.caras[0]=;
+            
+        }
+        if (numero==2){
+            this.posicionCarasDado = new int[6][2];
+            this.criatura=new Criatura();
+        }
+        if (numero==3){
+            this.posicionCarasDado = new int[6][2];
+            this.criatura=new Criatura();
+        }
+        if (numero==4){
+            this.posicionCarasDado = new int[6][2];
+            this.criatura=new Criatura();
+        }
+        
+        
     }
 
     public int[][] generarTerreno(int f,int c,int num,int rot){
