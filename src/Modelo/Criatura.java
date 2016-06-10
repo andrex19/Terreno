@@ -25,7 +25,6 @@ public class Criatura {
         this.ataque=ataque;
         this.defensa=defensa;
         this.movimiento=1;
-                        
     }
     
     public void Atacar(Criatura defensora){

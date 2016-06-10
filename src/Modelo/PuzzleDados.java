@@ -14,10 +14,8 @@ import java.lang.reflect.Array;
 public class PuzzleDados {
     public Dado[] puzzle=new Dado[15];
     
-    public PuzzleDados(){
-        for (int i=0; i<15 ; i++){
-            this.puzzle[i]= new Dado();
-        }
+    public PuzzleDados(Dado[] puzzle){
+        this.puzzle=puzzle;
     }
     
 }

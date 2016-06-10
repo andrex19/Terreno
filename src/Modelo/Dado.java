@@ -9,8 +9,10 @@ public class Dado {
     
 
     public Dado(int numero, Criatura criatura) {
+        this.posicionCarasDado = new int[6][2];
+        caras=new String[6];
         if (numero==1){
-            this.posicionCarasDado = new int[6][2];
+
             this.criatura=criatura;
             this.caras[0]="Mov";
             this.caras[1]="Inv";
@@ -21,7 +23,6 @@ public class Dado {
             
         }
         if (numero==2){
-            this.posicionCarasDado = new int[6][2];
             this.criatura=criatura;
             this.caras[0]="Tramp";
             this.caras[1]="Inv";
@@ -31,7 +32,6 @@ public class Dado {
             this.caras[5]="Tramp";
         }
         if (numero==3){
-            this.posicionCarasDado = new int[6][2];
             this.criatura=criatura;
             this.caras[0]="MovX3";
             this.caras[1]="Inv";
@@ -41,7 +41,6 @@ public class Dado {
             this.caras[5]="MagX2";
         }
         if (numero==4){
-            this.posicionCarasDado = new int[6][2];
             this.criatura=criatura;
             this.caras[0]="Inv";
             this.caras[1]="Inv";
@@ -284,7 +283,7 @@ public class Dado {
             puntos[4] = puntos[4] + 1;
             System.out.println("Obtuvo 1 punto de Invocacion");
         }
-        if("AtkX2".equals(caraDado)){
+        else if("AtkX2".equals(caraDado)){
             puntos[0] = puntos[0] + 2;
             System.out.println("Obtuvo 2 punto de Ataque");
         }
@@ -300,7 +299,7 @@ public class Dado {
             puntos[3] = puntos[3] + 2;
             System.out.println("Obtuvo 2 punto de Trampa");
         }
-        if("AtkX3".equals(caraDado)){
+        else if("AtkX3".equals(caraDado)){
             puntos[0] = puntos[0] + 3;
             System.out.println("Obtuvo 3 punto de Ataque");
         }

@@ -7,6 +7,7 @@ package Vista;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -176,7 +177,7 @@ public class VistaBatalla extends javax.swing.JFrame {
     public JButton[][] botones = new JButton[15][15];
     
     
-    public void agregarListener(ActionListener al,MouseAdapter ml){
+    public void agregarListener(ActionListener al,MouseAdapter ml,KeyListener kl){
         for (int i=0;i<15;i++){
             for (int j=0;j<15;j++){
                 this.botones[i][j].addActionListener(al);
@@ -191,6 +192,8 @@ public class VistaBatalla extends javax.swing.JFrame {
         this.btnMagia.addActionListener(al);
         this.btnMover.addActionListener(al);
         this.btnTrampa.addActionListener(al);
+        this.addKeyListener(kl);
+        this.setFocusable(true);
         
         
         
