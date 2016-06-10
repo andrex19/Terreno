@@ -8,24 +8,47 @@ public class Dado {
     public String[] caras;
     
 
-    public Dado(int numero) {
+    public Dado(int numero, Criatura criatura) {
         if (numero==1){
             this.posicionCarasDado = new int[6][2];
-            this.criatura=new Criatura();
-            this.caras[0]=;
+            this.criatura=criatura;
+            this.caras[0]="Mov";
+            this.caras[1]="Inv";
+            this.caras[2]="Atk";
+            this.caras[3]="Atk";
+            this.caras[4]="Mov";
+            this.caras[5]="Inv";
             
         }
         if (numero==2){
             this.posicionCarasDado = new int[6][2];
-            this.criatura=new Criatura();
+            this.criatura=criatura;
+            this.caras[0]="Tramp";
+            this.caras[1]="Inv";
+            this.caras[2]="AtkX2";
+            this.caras[3]="Atk";
+            this.caras[4]="Inv";
+            this.caras[5]="Tramp";
         }
         if (numero==3){
             this.posicionCarasDado = new int[6][2];
-            this.criatura=new Criatura();
+            this.criatura=criatura;
+            this.caras[0]="MovX3";
+            this.caras[1]="Inv";
+            this.caras[2]="Atk";
+            this.caras[3]="Atk";
+            this.caras[4]="Mov";
+            this.caras[5]="MagX2";
         }
         if (numero==4){
             this.posicionCarasDado = new int[6][2];
-            this.criatura=new Criatura();
+            this.criatura=criatura;
+            this.caras[0]="Inv";
+            this.caras[1]="Inv";
+            this.caras[2]="AtkX4";
+            this.caras[3]="AtkX3";
+            this.caras[4]="AtkX2";
+            this.caras[5]="Atk";
         }
         
         
@@ -239,8 +262,8 @@ public class Dado {
     //arraylist caras con las 6 caras del dado
     //arraylist puntos del Usuario en el orden (atk, mov, mag, tramp,inv)
     public void lanzarDado(String [] caras, int[] puntos){
-        int n = (int)Math.round((6 - 1)*Math.random());
-        String caraDado = caras[n];
+        int n = (int)Math.round((5)*Math.random());
+        String caraDado = this.caras[n];
         if(caraDado == "Atk"){
             puntos[0] = puntos[0] + 1;
             System.out.println("Obtuvo 1 punto de Ataque");
