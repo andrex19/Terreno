@@ -17,9 +17,10 @@ public class Criatura {
     public int ataque;
     public int defensa;
     public int movimiento;
+    public static int numero;
     
     public Criatura(int nivel, String nombre, int vida, int ataque, int defensa ){
-        this.nombre=nombre;
+        this.nombre=nombre + numero;
         this.puntosDeVida=vida;
         this.nivel=nivel;
         this.ataque=ataque;

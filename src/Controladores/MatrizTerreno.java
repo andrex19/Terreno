@@ -21,15 +21,15 @@ public class MatrizTerreno {
         }
             
                 
-        Jugador jugador1,jugador2,jugador3,jugador4;
-        jugador1=new Jugador("andres","hola",new PuzzleDados(aux),new JefeTerreno(1));
-        jugador2=new Jugador("diego","hola",new PuzzleDados(aux),new JefeTerreno(2));
-        jugador3=new Jugador("cristian","hola",new PuzzleDados(aux),new JefeTerreno(3));
-        jugador4=new Jugador("nico","hola",new PuzzleDados(aux),new JefeTerreno(4));
+        Jugador jugador1,jugador2,jugador3,jugador0;
+        jugador0=new Jugador("andres","hola",new PuzzleDados(aux),new JefeTerreno(1));
+        jugador1=new Jugador("diego","hola",new PuzzleDados(aux),new JefeTerreno(2));
+        jugador2=new Jugador("cristian","hola",new PuzzleDados(aux),new JefeTerreno(3));
+        jugador3=new Jugador("nico","hola",new PuzzleDados(aux),new JefeTerreno(4));
+        arreglo_usuario.add(jugador0);
         arreglo_usuario.add(jugador1);
         arreglo_usuario.add(jugador2);
         arreglo_usuario.add(jugador3);
-        arreglo_usuario.add(jugador4);
         this.arreglo_jugadores=arreglo_usuario;
         
         

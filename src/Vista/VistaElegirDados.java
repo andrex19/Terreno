@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
@@ -14,12 +15,23 @@ import javax.swing.JButton;
  * @author Andres Muñoz Bravo
  */
 public class VistaElegirDados extends javax.swing.JFrame {
-
+    public JButton[] botonesDados;
     /**
      * Creates new form VistaElegirDados
      */
     public VistaElegirDados() {
+        
         initComponents();
+        /*this.panelTerreno.setLayout(new GridLayout(15,15));
+        for (int i=0;i<5;i++){
+            for (int j=0;j<3;j++){
+                botonesDados [i][j]= new JButton();
+                botonesDados [i][j].setIcon(null);
+                botonesDados [i][j].setBorderPainted(true);
+                this.panelTerreno.add(botones[i][j]); 
+            }
+        
+        }*/
     }
 
     /**
@@ -83,7 +95,7 @@ public class VistaElegirDados extends javax.swing.JFrame {
 
         btnLanzar.setText("Lanzar!!!");
 
-        btnSalir.setText("Salir");
+        btnSalir.setText("jButton1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -128,7 +140,7 @@ public class VistaElegirDados extends javax.swing.JFrame {
                             .addComponent(btn12)
                             .addComponent(btn9)
                             .addComponent(btnLanzar))))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

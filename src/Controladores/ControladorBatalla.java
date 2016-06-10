@@ -34,7 +34,7 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener, 
     ImageIcon goku,rojo,verde,azul,kaio;
     Dado dado;
     public int[][] carasDado;
-    public static int numero=0;
+    public static int figura=0;
     public static int rotacion=0;
     public ArrayList <Integer> ordenTurnos;
     private int ultimo_boton;
@@ -53,7 +53,8 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener, 
         this.rojo = new ImageIcon(this.getClass().getResource("/Imagenes/rojo.png"));
         this.verde = new ImageIcon(this.getClass().getResource("/Imagenes/verde.png"));
         this.azul = new ImageIcon(this.getClass().getResource("/Imagenes/azul.png"));
-    }
+    
+        }
     public void generarTurnos(){
         Random random= new Random();
         int aleatorio;
@@ -76,23 +77,48 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener, 
         this.vistaTerreno=new VistaBatalla();
         this.vistaTerreno.setVisible(true);
         this.vistaTerreno.agregarListener(this,this,this); 
-        ponerJefesTerreno(this.arregloJugadores.get(0).usuario,
-                this.arregloJugadores.get(1).usuario,
-                this.arregloJugadores.get(2).usuario,
-                this.arregloJugadores.get(3).usuario);
+        ponerJefesTerreno(arregloJugadores);
         generarTurnos();
-            System.out.println(this.ordenTurnos);
-            System.out.println(ordenTurnos.get(turno));
-            jugadorActual=arregloJugadores.get(ordenTurnos.get(turno));
-            
-            System.out.println("turno: "+turno);
-            System.out.println(jugadorActual.usuario);
+        System.out.println(this.ordenTurnos);
+        System.out.println(ordenTurnos.get(turno));
+        jugadorActual=arregloJugadores.get(ordenTurnos.get(turno));
+        System.out.println(jugadorActual.usuario+" usuario actual al principio de todo ");
+        System.out.println("turno: "+turno);
+
         
     }
-    public void ponerJefesTerreno(String juagdor1, String jugador2, String jugador3, String jugador4){
-        tablero.infoCasillas[0][7].terreno=juagdor1;
-        tablero.infoCasillas[7][0].terreno=jugador2;/*  Aquí a cada terreno hay que darle el nombre de los distintos jefes de terreno*/
-        tablero.infoCasillas[7][14].terreno=jugador3;
+    public void ponerJefesTerreno(ArrayList<Jugador> arregloJugadores){
+        if (arregloJugadores.size()==2){
+            tablero.infoCasillas[0][7].terreno=arregloJugadores.get(0).usuario;
+            tablero.infoCasillas[7][0].terreno=arregloJugadores.get(1).usuario;
+            vistaTerreno.botones[0][7].setIcon(arregloJugadores.get(0).jefeTerreno.imagen);
+            vistaTerreno.botones[7][0].setIcon(arregloJugadores.get(1).jefeTerreno.imagen);
+            
+        }
+        else if (arregloJugadores.size()==3){
+            tablero.infoCasillas[0][7].terreno=arregloJugadores.get(0).usuario;
+            tablero.infoCasillas[7][0].terreno=arregloJugadores.get(1).usuario;
+            tablero.infoCasillas[14][7].terreno=arregloJugadores.get(2).usuario;
+            vistaTerreno.botones[0][7].setIcon(arregloJugadores.get(0).jefeTerreno.imagen);
+            vistaTerreno.botones[7][0].setIcon(arregloJugadores.get(1).jefeTerreno.imagen);
+            vistaTerreno.botones[14][7].setIcon(arregloJugadores.get(2).jefeTerreno.imagen);
+        }
+        else if (arregloJugadores.size()==4){
+            tablero.infoCasillas[0][7].terreno=arregloJugadores.get(0).usuario;
+            tablero.infoCasillas[7][0].terreno=arregloJugadores.get(1).usuario;
+            tablero.infoCasillas[14][7].terreno=arregloJugadores.get(2).usuario;
+            tablero.infoCasillas[7][14].terreno=arregloJugadores.get(3).usuario;
+            vistaTerreno.botones[0][7].setIcon(arregloJugadores.get(0).jefeTerreno.imagen);
+            vistaTerreno.botones[7][0].setIcon(arregloJugadores.get(1).jefeTerreno.imagen);
+            vistaTerreno.botones[14][7].setIcon(arregloJugadores.get(2).jefeTerreno.imagen);
+            vistaTerreno.botones[7][14].setIcon(arregloJugadores.get(3).jefeTerreno.imagen);
+            System.out.println(tablero.infoCasillas[0][7].terreno+ " terreno puesto en poner terreno");
+            System.out.println(tablero.infoCasillas[7][0].terreno+ " terreno puesto en poner terreno");
+            System.out.println(tablero.infoCasillas[14][7].terreno+ " terreno puesto en poner terreno");
+            System.out.println(tablero.infoCasillas[7][14].terreno+ " terreno puesto en poner terreno");
+        }
+        /*  Aquí a cada terreno hay que darle el nombre de los distintos jefes de terreno*/
+        /*tablero.infoCasillas[7][14].terreno=jugador3;
         tablero.infoCasillas[14][7].terreno=jugador4;
         vistaTerreno.botones[0][7].setIcon(arregloJugadores.get(0).jefeTerreno.imagen);
         vistaTerreno.botones[7][0].setIcon(arregloJugadores.get(1).jefeTerreno.imagen);
@@ -102,7 +128,7 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener, 
         System.out.println(tablero.infoCasillas[7][0].terreno+ " terreno puesto en poner terreno");
         System.out.println(tablero.infoCasillas[14][7].terreno+ " terreno puesto en poner terreno");
         System.out.println(tablero.infoCasillas[7][14].terreno+ " terreno puesto en poner terreno");
-        
+        */
         
         
         
@@ -182,7 +208,7 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener, 
                         System.out.println(" haz presionado el boton !("+i+","+j+")" );
                         dado=jugadorActual.puzle.puzzle[1];
                         //HAY QUE ELEGIR EL DADO QUE SE NECESITA INVOCARR!!! (ASI COMO ESTA... INVOCA UNA CRIATURA DE UN DADO EN ESPECIFICO)
-                        carasDado=dado.generarTerreno(i,j,numero,rotacion);
+                        carasDado=dado.generarTerreno(i,j,figura,rotacion);
                         if (tablero.verificarTerreno(carasDado,jugadorActual.usuario,tablero)){
                             ponerFiguraDado(carasDado,jugadorActual.usuario,jugadorActual.jefeTerreno.imagen);
                             invocarCriatura(carasDado,dado.criatura);
@@ -209,6 +235,7 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener, 
         }
         if (vistaTerreno.getBtnMover()==e.getSource()){
             ultimo_boton=3;
+            
             System.out.println("click en boton mover");
         }
         if (ultimo_boton==3){ 
@@ -251,16 +278,16 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener, 
     public void mouseWheelMoved(MouseWheelEvent e){
         if (ultimo_boton==1){
             if (e.getWheelRotation()==1){
-                System.out.println(" Cambiar a figura " + numero);
-                if (numero>0){
-                    numero-=1;
+                System.out.println(" Cambiar a figura " + figura);
+                if (figura>0){
+                    figura-=1;
                 }
                 limpiar();
             }
             else if(e.getWheelRotation()==-1){
-                System.out.println(" cambiar a figura: "+ numero);
-                if (numero<10){
-                    numero+=1;
+                System.out.println(" cambiar a figura: "+ figura);
+                if (figura<10){
+                    figura+=1;
                 } 
                 limpiar();
             }
@@ -292,7 +319,7 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener, 
                    if (vistaTerreno.botones[i][j]==e.getSource()){
                         System.out.println(" mouse sobre el boton!("+i+","+j+")" );
                         //vistaTerreno.botones[i][j].setIcon(pasto);
-                        carasDado=jugadorActual.puzle.puzzle[0].generarTerreno(i,j,numero,rotacion);
+                        carasDado=jugadorActual.puzle.puzzle[0].generarTerreno(i,j,figura,rotacion);
                         //CAMBIAR ARREGLAR LO DEL METODO GENNERAR TERRENO !!!"#!"#SALKDFJALSDKFJQWR1"#!#
                         pintarTerrenoValido(carasDado,true);
 
@@ -310,7 +337,7 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener, 
                    if (vistaTerreno.botones[i][j]==e.getSource()){
                         System.out.println(" mouse sobre el boton!("+i+","+j+")" );
                         //vistaTerreno.botones[i][j].setIcon(pasto);
-                        carasDado=jugadorActual.puzle.puzzle[0].generarTerreno(i,j,numero,rotacion);
+                        carasDado=jugadorActual.puzle.puzzle[0].generarTerreno(i,j,figura,rotacion);
                         //CAMBIAR ARREGLAR LO DEL METODO GENNERAR TERRENO !!!"#!"#SALKDFJALSDKFJQWR1"#!#
                         pintarTerrenoValido(carasDado,false);
                     }
@@ -333,11 +360,23 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener, 
         System.out.println("presione algo");
   
         
+////        if (e.getKeyCode() == KeyEvent.VK_W){
+////             System.out.println("Up_Arrow_Key Pressed");
+////        }
+////        else if (e.getKeyCode() == KeyEvent.VK_A){
+////             System.out.println("Left_Arrow_Key Pressed");          
+////        }
+////        else if (e.getKeyCode() == KeyEvent.VK_S){
+////             System.out.println("down_Arrow_Key Pressed");          
+////        }
+////        else if (e.getKeyCode() == KeyEvent.VK_D){
+////             System.out.println("Right_Arrow_Key Pressed");          
+////        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-  
+   
     }
   
     
