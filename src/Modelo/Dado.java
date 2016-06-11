@@ -6,14 +6,15 @@ public class Dado {
     public int posicionCarasDado[][];
     public Criatura criatura;
     public String[] caras;
-    
+   
 
     public Dado(int numero, Criatura criatura) {
         this.posicionCarasDado = new int[6][2];
         caras=new String[6];
+        this.criatura=criatura;
+        
+        
         if (numero==1){
-
-            this.criatura=criatura;
             this.caras[0]="Mov";
             this.caras[1]="Inv";
             this.caras[2]="Atk";
@@ -23,7 +24,6 @@ public class Dado {
             
         }
         if (numero==2){
-            this.criatura=criatura;
             this.caras[0]="Tramp";
             this.caras[1]="Inv";
             this.caras[2]="AtkX2";
@@ -32,7 +32,6 @@ public class Dado {
             this.caras[5]="Tramp";
         }
         if (numero==3){
-            this.criatura=criatura;
             this.caras[0]="MovX3";
             this.caras[1]="Inv";
             this.caras[2]="Atk";
@@ -41,7 +40,6 @@ public class Dado {
             this.caras[5]="MagX2";
         }
         if (numero==4){
-            this.criatura=criatura;
             this.caras[0]="Inv";
             this.caras[1]="Inv";
             this.caras[2]="AtkX4";
@@ -258,10 +256,11 @@ public class Dado {
     return carasDado;
     }
     //Metodos//
-    //arraylist caras con las 6 caras del dado
-    //arraylist puntos del Usuario en el orden (atk, mov, mag, tramp,inv)
+    //array caras con las 6 caras del dado
+    //array puntos del Usuario en el orden (atk, mov, mag, tramp,inv)
     public void lanzarDado(String [] caras, int[] puntos){
         int n = (int)Math.round((5)*Math.random());
+        System.out.println("este es el valor de n: " + n);
         String caraDado = this.caras[n];
         if("Atk".equals(caraDado)){
             puntos[0] = puntos[0] + 1;

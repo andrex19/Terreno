@@ -26,8 +26,8 @@ public class Criatura {
         this.ataque=ataque;
         this.defensa=defensa;
         this.movimiento=1;
-    }
-    
+        numero=numero+1;
+    }   
     public void Atacar(Criatura defensora){
         int Daño;
         if (this.ataque>defensora.defensa){
@@ -43,5 +43,4 @@ public class Criatura {
             System.out.println(this.nombre+" se quita a sí mismo");
         }
     }
-    
 }

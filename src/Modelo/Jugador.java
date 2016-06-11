@@ -23,6 +23,7 @@ public class Jugador {
         this.jefeTerreno=jefeTerreno;
         puntos = new int[5];
         //ataque, movimiento, magia, trampa, invocacion.
+        //array puntos del Usuario en el orden (atk, mov, mag, tramp,inv)
     }
     
     
