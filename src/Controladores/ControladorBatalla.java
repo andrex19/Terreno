@@ -44,6 +44,10 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener, 
     public Jugador jugadorActual;
     ArrayList<Jugador> arregloJugadores = new ArrayList<Jugador>();
     
+    //para atacar!
+    Criatura criaturaAtk = null;
+    Criatura criaturaDef = null ;
+    
 
     public ControladorBatalla() {
         this.controladorElegirDados=new ControladorElegirDados();
@@ -137,6 +141,7 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener, 
                 
         vistaTerreno.botones[x][y].setIcon(azul);
         tablero.infoCasillas[x][y].criatura=criatura;
+        tablero.infoCasillas[x][y].ocupadoPor=jugadorActual.usuario;
     }
 
     public void limpiar(){
@@ -224,11 +229,14 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener, 
             System.out.println("click en boton mover");
         }
         if (ultimo_boton==3){
-            if (jugadorActual.puntos[1]>0){
+            //if (jugadorActual.puntos[1]>0){
                 for (int i=0;i<15;i++){
                     for (int j=0;j<15;j++){
-                        if (tablero.infoCasillas[i][j].criatura!=null){
+                        if (tablero.infoCasillas[i][j].criatura!=null){//si esque hay una criatura en el campo
                             System.out.println(tablero.infoCasillas[i][j].criatura.nombre);
+                            if(tablero.infoCasillas[i][j].ocupadoPor.equals(jugadorActual.usuario)){
+                                System.out.println("esta criatura me pertencese!!");
+                            }    
                         }
 
 
@@ -238,10 +246,8 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener, 
                     }
                 }
                 
-            }
-            else {
-                System.out.println("no tiene puntos suficientes para mover");
-            }
+            //}
+            
             
             
         }
@@ -268,6 +274,59 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener, 
         }
         if (ultimo_boton==5){
             
+        }
+        if (vistaTerreno.getBtnAtacar()==e.getSource()){
+            ultimo_boton=6;
+            System.out.println("click en boton Atacar");
+        }
+        if (ultimo_boton==6){
+            if(criaturaAtk==null){
+            for (int i=0;i<15;i++){
+                for (int j=0;j<15;j++){
+                    if (vistaTerreno.botones[i][j]==e.getSource()){
+                        if (tablero.infoCasillas[i][j].criatura!=null){
+                            if(tablero.infoCasillas[i][j].ocupadoPor.equals(jugadorActual.usuario)){
+                                System.out.println("esta criatura me pertencese!!");
+                                criaturaAtk=tablero.infoCasillas[i][j].criatura;
+                                System.out.println("se ha seleccionado la criatura para atacar");
+                            }
+                            else{
+                                System.out.println("esta criatura no me pertenece!");
+                            }
+                            //System.out.println(" haz presionado el boton !("+i+","+j+")" );
+                            //System.out.println(tablero.infoCasillas[i][j].criatura.nombre);
+                            //System.out.println(tablero.infoCasillas[i][j].ocupadoPor);
+                        }
+                    }
+                }
+            }
+            }
+            if(criaturaAtk!=null){
+            for (int i=0;i<15;i++){
+                for (int j=0;j<15;j++){
+                            if (vistaTerreno.botones[i][j]==e.getSource()){
+                                if (tablero.infoCasillas[i][j].criatura!=null){
+                                    if(tablero.infoCasillas[i][j].ocupadoPor.equals(jugadorActual.usuario)==false){
+                                        System.out.println("esta criatura no me pertencese!!criatura defensora");
+                                        criaturaDef=tablero.infoCasillas[i][j].criatura;
+                                        System.out.println("puntos de vida antes: " + criaturaDef.puntosDeVida);
+                                        criaturaAtk.Atacar(criaturaDef);
+                                        System.out.println("se ha seeccionado la criatura para defender");
+                                        System.out.println("puntos de vida despues: " + criaturaDef.puntosDeVida);
+                                        criaturaAtk=null;
+                                        criaturaDef=null;
+
+                                    }    
+                                }
+                            }
+                }
+            }
+            }
+            else{
+                System.out.println("tiene que seleccionaar una criatura atacante");
+            }
+            
+           
         }
         if (vistaTerreno.getBtnFinalizar()==e.getSource()){
             System.out.println("click en boton finalizar turno");
