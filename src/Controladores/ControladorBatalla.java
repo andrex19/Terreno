@@ -204,6 +204,7 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener, 
                         if (tablero.verificarTerreno(carasDado,jugadorActual.usuario,tablero)){
                             ponerFiguraDado(carasDado,jugadorActual.usuario,jugadorActual.jefeTerreno.imagen);
                             invocarCriatura(carasDado,dado.criatura);
+                            System.out.println(dado.criatura.nombre + "ha sido invocada");
                             ultimo_boton=0;
                         }
                         else{
@@ -223,6 +224,8 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener, 
         if (ultimo_boton==2){
             
         }
+        
+        
         if (vistaTerreno.getBtnMover()==e.getSource()){
             ultimo_boton=3;
             
@@ -233,9 +236,9 @@ public class ControladorBatalla extends MouseAdapter implements ActionListener, 
                 for (int i=0;i<15;i++){
                     for (int j=0;j<15;j++){
                         if (tablero.infoCasillas[i][j].criatura!=null){//si esque hay una criatura en el campo
-                            System.out.println(tablero.infoCasillas[i][j].criatura.nombre);
                             if(tablero.infoCasillas[i][j].ocupadoPor.equals(jugadorActual.usuario)){
-                                System.out.println("esta criatura me pertencese!!");
+                                System.out.println(tablero.infoCasillas[i][j].criatura.nombre);
+                                System.out.println("esta criatura puedo mover");
                             }    
                         }
 
